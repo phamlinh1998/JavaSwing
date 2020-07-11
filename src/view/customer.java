@@ -73,6 +73,13 @@ public class customer extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Email:");
 
+        txtCMND.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtPhone.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -229,7 +236,6 @@ public class customer extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(btnReset)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(

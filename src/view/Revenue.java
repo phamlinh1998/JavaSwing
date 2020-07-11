@@ -39,6 +39,10 @@ public class Revenue extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnRefresh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        btnPrint.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 102));
         jLabel1.setText("Thống kê");
@@ -54,6 +58,7 @@ public class Revenue extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Tìm kiếm theo ngày:");
 
+        txtDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDateActionPerformed(evt);

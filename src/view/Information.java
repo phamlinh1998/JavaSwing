@@ -33,13 +33,13 @@ public class Information extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lbName = new javax.swing.JLabel();
+        lbGender = new javax.swing.JLabel();
+        lbBirth = new javax.swing.JLabel();
+        lbPhone = new javax.swing.JLabel();
+        lbEmail = new javax.swing.JLabel();
+        lbAddress = new javax.swing.JLabel();
+        btnOK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,19 +67,25 @@ public class Information extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 0, 51));
         jLabel6.setText("Email:");
 
-        jLabel7.setText("trống");
+        lbName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbName.setText("trống");
 
-        jLabel8.setText("trống");
+        lbGender.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbGender.setText("trống");
 
-        jLabel9.setText("trống");
+        lbBirth.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbBirth.setText("trống");
 
-        jLabel10.setText("trống");
+        lbPhone.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbPhone.setText("trống");
 
-        jLabel11.setText("trống");
+        lbEmail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbEmail.setText("trống");
 
-        jLabel12.setText("trống");
+        lbAddress.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbAddress.setText("trống");
 
-        jButton1.setText("Đồng ý");
+        btnOK.setText("Đồng ý");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,7 +94,7 @@ public class Information extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(btnOK)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -99,12 +105,12 @@ public class Information extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))))
+                            .addComponent(lbName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbGender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbBirth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                            .addComponent(lbEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,29 +119,29 @@ public class Information extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel7))
+                    .addComponent(lbName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel8))
+                    .addComponent(lbGender))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel9))
+                    .addComponent(lbBirth))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel10))
+                    .addComponent(lbPhone))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel11))
+                    .addComponent(lbEmail))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel12))
+                    .addComponent(lbAddress))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addComponent(btnOK))
         );
 
         pack();
@@ -178,18 +184,18 @@ public class Information extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnOK;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lbAddress;
+    private javax.swing.JLabel lbBirth;
+    private javax.swing.JLabel lbEmail;
+    private javax.swing.JLabel lbGender;
+    private javax.swing.JLabel lbName;
+    private javax.swing.JLabel lbPhone;
     // End of variables declaration//GEN-END:variables
 }

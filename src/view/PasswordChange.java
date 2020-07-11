@@ -50,6 +50,11 @@ public class PasswordChange extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("Nhập lại mật khẩu:");
 
+        txtPassCu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtPassNew.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtConfirmPass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtConfirmPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmPassActionPerformed(evt);

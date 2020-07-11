@@ -56,11 +56,16 @@ public class ThongKe extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Tổng giá:");
 
+        cbTimKiemTK.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbTimKiemTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTimKiemTKActionPerformed(evt);
             }
         });
+
+        txtSoLuong.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtGia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
@@ -83,6 +88,7 @@ public class ThongKe extends javax.swing.JFrame {
         btnNgay.setText("Thống Kê Theo Ngày");
 
         SPBan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        SPBan.setForeground(new java.awt.Color(0, 0, 204));
         SPBan.setText("Sản Phẩm Bán Nhiều Nhất");
 
         btnReset.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N

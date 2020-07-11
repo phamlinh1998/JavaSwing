@@ -47,6 +47,10 @@ public class LoginForm extends javax.swing.JFrame {
 
         jTextField3.setText("Quyền Truy Cập:");
 
+        jTextField4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nhân Viên", "Quản Lý" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +90,7 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(351, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
 
         pack();

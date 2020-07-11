@@ -66,6 +66,12 @@ public class Order extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("Nhân viên:");
 
+        cbIDOrder.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        cbIDProduct.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        cbNameEmp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 0, 255));
         jLabel5.setText("Chương trình khuyến mãi:");
@@ -75,6 +81,10 @@ public class Order extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Mã khách hàng:");
 
+        cbPromotions.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        cbIDCus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 204, 0));
         jLabel7.setText("Thời gian:");
@@ -83,9 +93,18 @@ public class Order extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 204, 0));
         jLabel8.setText("Ngày:");
 
+        txtTime.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         btnSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(255, 0, 0));
         btnSearch.setText("Tìm Kiếm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,6 +207,10 @@ public class Order extends javax.swing.JFrame {
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments

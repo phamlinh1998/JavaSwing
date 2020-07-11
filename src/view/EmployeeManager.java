@@ -108,7 +108,16 @@ public class EmployeeManager extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Địa chỉ :");
 
+        txtUser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtPass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtPass1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         tarAddress.setColumns(20);
+        tarAddress.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
         tarAddress.setRows(5);
         jScrollPane2.setViewportView(tarAddress);
 
@@ -128,12 +137,14 @@ public class EmployeeManager extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Số điện thoại :");
 
+        txtName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
             }
         });
 
+        txtPhone.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPhoneActionPerformed(evt);
@@ -231,6 +242,8 @@ public class EmployeeManager extends javax.swing.JFrame {
         btnBrowse.setForeground(new java.awt.Color(255, 0, 0));
         btnBrowse.setText("Browse...");
 
+        btnAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(0, 0, 255));
         btnAdd.setText("Thêm");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,8 +251,12 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
+        btnReset.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnReset.setForeground(new java.awt.Color(255, 255, 0));
         btnReset.setText("Làm Mới");
 
+        btnEdit.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(0, 153, 153));
         btnEdit.setText("Sửa");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,8 +264,12 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
+        btnLuu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnLuu.setForeground(new java.awt.Color(51, 255, 255));
         btnLuu.setText("Lưu");
 
+        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 0, 0));
         btnDelete.setText("Xóa");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,12 +277,14 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
+        btnClose.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnClose.setText("Đóng");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Tìm Kiếm Nhân Viên :");
 
+        txtSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSearchActionPerformed(evt);
@@ -354,11 +377,12 @@ public class EmployeeManager extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)

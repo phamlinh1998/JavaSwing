@@ -58,6 +58,8 @@ public class Promotions extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setText("Tên chương trình (có thể ghi dấu):");
 
+        txtName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 255));
         jLabel3.setText("Chiếu khấu (%):");
@@ -74,6 +76,8 @@ public class Promotions extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 0, 255));
         jLabel6.setText("Mã:");
 
+        txtDis.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         lbID.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbID.setForeground(new java.awt.Color(255, 0, 0));
         lbID.setText("Tự động");
@@ -86,8 +90,12 @@ public class Promotions extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        btnAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(0, 0, 255));
         btnAdd.setText("Thêm");
 
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(0, 255, 0));
         btnUpdate.setText("Cập Nhật");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,8 +103,11 @@ public class Promotions extends javax.swing.JFrame {
             }
         });
 
+        btnDel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDel.setForeground(new java.awt.Color(255, 0, 0));
         btnDel.setText("Xóa");
 
+        btnReset.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnReset.setText("Làm Mới");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -159,7 +170,7 @@ public class Promotions extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +211,7 @@ public class Promotions extends javax.swing.JFrame {
                     .addComponent(btnReset))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();

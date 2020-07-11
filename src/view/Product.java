@@ -48,7 +48,7 @@ public class Product extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        a = new javax.swing.JComboBox<>();
         cbKichThuoc = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         cbKichCo = new javax.swing.JComboBox<>();
@@ -97,39 +97,62 @@ public class Product extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("Giá Sản Phẩm :");
 
+        txtIDProduct.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtIDProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIDProductActionPerformed(evt);
             }
         });
 
-        cbNameType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtNameproduct.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtPrice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNameType.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jComboBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 255));
         jLabel5.setText("Giá từ:");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 255));
         jLabel6.setText("Đến :");
 
+        txtGiaTu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtDen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtDen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDenActionPerformed(evt);
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 0, 0));
         jLabel7.setText("VNĐ");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("VNĐ");
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Nhóm:");
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Kích Thước:");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        a.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        a.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aActionPerformed(evt);
+            }
+        });
 
-        cbKichThuoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbKichThuoc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout cbLoaiTKLayout = new javax.swing.GroupLayout(cbLoaiTK);
         cbLoaiTK.setLayout(cbLoaiTKLayout);
@@ -138,7 +161,7 @@ public class Product extends javax.swing.JFrame {
             .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(cbLoaiTKLayout.createSequentialGroup()
                 .addGroup(cbLoaiTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -146,7 +169,7 @@ public class Product extends javax.swing.JFrame {
                 .addGroup(cbLoaiTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtGiaTu)
                     .addComponent(txtDen, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(a, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbKichThuoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(cbLoaiTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +194,7 @@ public class Product extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(cbLoaiTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(cbLoaiTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,7 +207,7 @@ public class Product extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Kích cỡ :");
 
-        cbKichCo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbKichCo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
@@ -340,13 +363,14 @@ public class Product extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 0, 0));
         jLabel14.setText("Kích Cỡ :");
 
+        txtIDProductType.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtNameType.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtNameType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameTypeActionPerformed(evt);
             }
         });
-
-        cbSizeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnThemLoaiSP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnThemLoaiSP.setText("Thêm Mới");
@@ -515,6 +539,10 @@ public class Product extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemLoaiSPActionPerformed
 
+    private void aActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -551,6 +579,7 @@ public class Product extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> a;
     private javax.swing.JButton btnAddSP;
     private javax.swing.JButton btnDeleteSP;
     private javax.swing.JButton btnResetLoaiSP;
@@ -568,7 +597,6 @@ public class Product extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbSizeType;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
