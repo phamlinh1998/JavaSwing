@@ -33,6 +33,8 @@ create table Employee(
 	Address nvarchar(Max),
 	Hinh varchar(50)
 )
+select * from Employee
+
 go
 Create Table Revenue(
 	IDRevenue int Identity(1,1) Primary key,
@@ -78,4 +80,19 @@ Create Table OrderDetails(
 go
 --Insert 1 Administrators
 Insert into Administrator values('admin','admin')
+--Insert ProductType
+Insert into ProductType values('T01',N'Cà phê',N'Nhỏ')
+Insert into ProductType values('T02',N'Cà phê',N'Vừa')
+Insert into ProductType values('T03',N'Cà phê',N'Lớn')
+Insert into ProductType values('T04',N'Nước trái cây',N'Nhỏ')
+Insert into ProductType values('T05',N'Nước trái cây',N'Vừa')
+Insert into ProductType values('T06',N'Nước trái cây',N'Lớn')
+Insert into ProductType values('T07',N'Trà sữa',N'Nhỏ')
+Insert into ProductType values('T08',N'Trà sữa',N'Vừa')
+Insert into ProductType values('T09',N'Trà sữa',N'Lớn')
+---insert product
+Insert into Product values('CF01', N'Cà phê đá', 'T01', 20000)
+Insert into Product values('CF02', N'Cà phê đá', 'T02', 25000)
+Insert into Product values('CF03', N'Cà phê đá', 'T03', 30000)
 
+Insert into Employee values('vutung','123456',N'Vũ Văn Tùng',N'Nam','01/01/1996','0124566789','tung@gmail.com',N'Dĩ an','2.jpg')
