@@ -164,10 +164,68 @@ public class EmployeeManager extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Địa chỉ :");
+<<<<<<< HEAD
+=======
+
+        txtUser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtPass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtPass1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        tarAddress.setColumns(20);
+        tarAddress.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        tarAddress.setRows(5);
+        jScrollPane2.setViewportView(tarAddress);
+>>>>>>> origin/master
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Họ và Tên :");
+<<<<<<< HEAD
+=======
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Giới tính : ");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Ngày sinh : ");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Số điện thoại :");
+
+        txtName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+
+        txtPhone.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPhoneActionPerformed(evt);
+            }
+        });
+
+        rdMale.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        rdMale.setForeground(new java.awt.Color(255, 0, 0));
+        rdMale.setText("Nam");
+
+        rdFemale.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        rdFemale.setForeground(new java.awt.Color(153, 0, 153));
+        rdFemale.setText("Nữ");
+        rdFemale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdFemaleActionPerformed(evt);
+            }
+        });
+>>>>>>> origin/master
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Số ngày làm việc : ");
@@ -255,6 +313,7 @@ public class EmployeeManager extends javax.swing.JFrame {
         tarAddress.setRows(5);
         jScrollPane3.setViewportView(tarAddress);
 
+<<<<<<< HEAD
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Giới tính : ");
@@ -297,6 +356,10 @@ public class EmployeeManager extends javax.swing.JFrame {
         });
 
         btnAdd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+=======
+        btnAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(0, 0, 255));
+>>>>>>> origin/master
         btnAdd.setText("Thêm");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,6 +367,7 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         btnReset.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnReset.setText("Làm mới");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
@@ -311,8 +375,18 @@ public class EmployeeManager extends javax.swing.JFrame {
                 btnResetActionPerformed(evt);
             }
         });
+=======
+        btnReset.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnReset.setForeground(new java.awt.Color(255, 255, 0));
+        btnReset.setText("Làm Mới");
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         btnEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+=======
+        btnEdit.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(0, 153, 153));
+>>>>>>> origin/master
         btnEdit.setText("Sửa");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,7 +394,16 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         btnDelete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+=======
+        btnLuu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnLuu.setForeground(new java.awt.Color(51, 255, 255));
+        btnLuu.setText("Lưu");
+
+        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 0, 0));
+>>>>>>> origin/master
         btnDelete.setText("Xóa");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -328,7 +411,11 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         btnClose.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+=======
+        btnClose.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+>>>>>>> origin/master
         btnClose.setText("Đóng");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -348,6 +435,7 @@ public class EmployeeManager extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(255, 0, 153));
         jLabel17.setText("*");
 
+<<<<<<< HEAD
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 0, 102));
         jLabel19.setText("*");
@@ -355,6 +443,10 @@ public class EmployeeManager extends javax.swing.JFrame {
         btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnTimKiem.setText("Tìm kiếm nhân viên");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+=======
+        txtSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> origin/master
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimKiemActionPerformed(evt);
             }
@@ -451,9 +543,23 @@ public class EmployeeManager extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+=======
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23)
+>>>>>>> origin/master
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)

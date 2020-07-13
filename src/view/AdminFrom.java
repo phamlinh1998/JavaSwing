@@ -48,6 +48,7 @@ public class AdminFrom extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
         jPanel1 = new javax.swing.JPanel(){
             ImageIcon icon = new ImageIcon("image//ca-phe-say-lanh.png");
             public void paintComponent(Graphics g){
@@ -65,6 +66,16 @@ public class AdminFrom extends javax.swing.JFrame {
         btnOrder = new javax.swing.JButton();
         btnRevenue = new javax.swing.JButton();
         btnPromotion = new javax.swing.JButton();
+=======
+        jPanel1 = new javax.swing.JPanel();
+        btnLogout = new javax.swing.JButton();
+        btnProduct = new javax.swing.JButton();
+        btnRevenue = new javax.swing.JButton();
+        btnOrder = new javax.swing.JButton();
+        btnEmp = new javax.swing.JButton();
+        btnPromotions = new javax.swing.JButton();
+        btnCustomer = new javax.swing.JButton();
+>>>>>>> origin/master
         btnHistory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,6 +83,7 @@ public class AdminFrom extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(912, 570));
         setResizable(false);
 
+<<<<<<< HEAD
         jButton2.setIcon(new javax.swing.ImageIcon("G:\\java_aptech\\Do_An_JavaSwing\\C1812M_Nhom5\\src\\Icon\\logout.png")); // NOI18N
         jButton2.setText("Đăng Xuất");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -79,25 +91,54 @@ public class AdminFrom extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+=======
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(255, 0, 0));
+        btnLogout.setText("Đăng Xuất");
+>>>>>>> origin/master
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 786, Short.MAX_VALUE))
+=======
+                .addComponent(btnLogout)
+                .addGap(0, 0, Short.MAX_VALUE))
+>>>>>>> origin/master
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 36, Short.MAX_VALUE))
+=======
+                .addComponent(btnLogout)
+                .addGap(0, 77, Short.MAX_VALUE))
+>>>>>>> origin/master
         );
 
+<<<<<<< HEAD
         btnEmployeeManager.setToolTipText("Quản lý nhân viên");
         btnEmployeeManager.addActionListener(new java.awt.event.ActionListener() {
+=======
+        btnProduct.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        btnRevenue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        btnOrder.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        btnEmp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        btnPromotions.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnPromotions.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> origin/master
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+<<<<<<< HEAD
                 btnEmployeeManagerActionPerformed(evt);
             }
         });
@@ -142,13 +183,21 @@ public class AdminFrom extends javax.swing.JFrame {
         btnHistory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistoryActionPerformed(evt);
+=======
+                btnPromotionsActionPerformed(evt);
+>>>>>>> origin/master
             }
         });
+
+        btnCustomer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        btnHistory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -168,14 +217,49 @@ public class AdminFrom extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 14, Short.MAX_VALUE))
+=======
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(73, 73, 73))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(136, 136, 136)
+                                .addComponent(btnEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(151, 151, 151)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPromotions, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(134, 134, 134)
+                        .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                        .addContainerGap())))
+>>>>>>> origin/master
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                 .addGap(36, 36, 36)
+=======
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+>>>>>>> origin/master
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -193,12 +277,22 @@ public class AdminFrom extends javax.swing.JFrame {
                         .addComponent(btnPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                    .addComponent(btnRevenue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(btnPromotions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(11, 11, 11))))
+>>>>>>> origin/master
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int click = JOptionPane.showConfirmDialog(null, "Đăng xuất ngay bây giờ?");
         if (click == 0) {
@@ -234,6 +328,11 @@ public class AdminFrom extends javax.swing.JFrame {
     private void btnHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoryActionPerformed
         new History().setVisible(true);
     }//GEN-LAST:event_btnHistoryActionPerformed
+=======
+    private void btnPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromotionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPromotionsActionPerformed
+>>>>>>> origin/master
 
     /**
      * @param args the command line arguments
@@ -272,6 +371,7 @@ public class AdminFrom extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomer;
+<<<<<<< HEAD
     private javax.swing.JButton btnEmployeeManager;
     private javax.swing.JButton btnHistory;
     private javax.swing.JButton btnOrder;
@@ -279,6 +379,15 @@ public class AdminFrom extends javax.swing.JFrame {
     private javax.swing.JButton btnPromotion;
     private javax.swing.JButton btnRevenue;
     private javax.swing.JButton jButton2;
+=======
+    private javax.swing.JButton btnEmp;
+    private javax.swing.JButton btnHistory;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnOrder;
+    private javax.swing.JButton btnProduct;
+    private javax.swing.JButton btnPromotions;
+    private javax.swing.JButton btnRevenue;
+>>>>>>> origin/master
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 

@@ -120,6 +120,41 @@ public class Product extends javax.swing.JFrame {
             }
         };
         jTabbedPane1 = new javax.swing.JTabbedPane();
+<<<<<<< HEAD
+=======
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtIDProduct = new javax.swing.JTextField();
+        txtNameproduct = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
+        cbNameType = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        cbLoaiTK = new javax.swing.JPanel();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtGiaTu = new javax.swing.JTextField();
+        txtDen = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        a = new javax.swing.JComboBox<>();
+        cbKichThuoc = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        cbKichCo = new javax.swing.JComboBox<>();
+        btnTimKiem = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        btnAddSP = new javax.swing.JButton();
+        btnUpdateSP = new javax.swing.JButton();
+        btnDeleteSP = new javax.swing.JButton();
+        btnResetSP = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblSP = new javax.swing.JTable();
+>>>>>>> origin/master
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -386,45 +421,113 @@ public class Product extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Giá Sản Phẩm :");
 
+        txtIDProduct.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtIDProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIDProductActionPerformed(evt);
             }
         });
 
+<<<<<<< HEAD
         cbNameType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+=======
+        txtNameproduct.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         cbChonTimKiem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "---Tìm kiếm theo---", "Tên", "Giá", "Nhóm" }));
         cbChonTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbChonTimKiemActionPerformed(evt);
             }
         });
+=======
+        txtPrice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         cbTen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+=======
+        cbNameType.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         lbGiaTu.setText("Giá từ:");
+=======
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
+        jComboBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel5.setText("Giá từ:");
+>>>>>>> origin/master
+
+<<<<<<< HEAD
         lbDen.setText("Đến :");
+=======
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel6.setText("Đến :");
+>>>>>>> origin/master
 
+        txtGiaTu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtDen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtDen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDenActionPerformed(evt);
             }
         });
 
+<<<<<<< HEAD
         lbVND.setText("VNĐ");
+=======
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel7.setText("VNĐ");
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         lbVND1.setText("VNĐ");
+=======
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setText("VNĐ");
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         lbLoai.setText("Nhóm:");
+=======
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Nhóm:");
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         lbNhom.setText("Kích Thước:");
+=======
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Kích Thước:");
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         cbLoaiTK.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+=======
+        a.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        a.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aActionPerformed(evt);
+            }
+        });
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         cbKichThuoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nhỏ", "Vừa", "Lớn" }));
+=======
+        cbKichThuoc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+>>>>>>> origin/master
 
+<<<<<<< HEAD
         javax.swing.GroupLayout PanelTimKiemLayout = new javax.swing.GroupLayout(PanelTimKiem);
         PanelTimKiem.setLayout(PanelTimKiemLayout);
         PanelTimKiemLayout.setHorizontalGroup(
@@ -444,6 +547,25 @@ public class Product extends javax.swing.JFrame {
                             .addComponent(txtDen)
                             .addComponent(cbLoaiTK, 0, 178, Short.MAX_VALUE)
                             .addComponent(cbKichThuoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+=======
+        javax.swing.GroupLayout cbLoaiTKLayout = new javax.swing.GroupLayout(cbLoaiTK);
+        cbLoaiTK.setLayout(cbLoaiTKLayout);
+        cbLoaiTKLayout.setHorizontalGroup(
+            cbLoaiTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(cbLoaiTKLayout.createSequentialGroup()
+                .addGroup(cbLoaiTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cbLoaiTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtGiaTu)
+                    .addComponent(txtDen, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(a, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbKichThuoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> origin/master
                 .addGap(18, 18, 18)
                 .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbVND, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
@@ -465,9 +587,15 @@ public class Product extends javax.swing.JFrame {
                     .addComponent(txtDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbVND1))
                 .addGap(18, 18, 18)
+<<<<<<< HEAD
                 .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbLoaiTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                .addGroup(cbLoaiTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+>>>>>>> origin/master
                 .addGap(18, 18, 18)
                 .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -479,7 +607,11 @@ public class Product extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Kích cỡ :");
 
+<<<<<<< HEAD
         cbKichCo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lớn", "Vừa", "Nhỏ" }));
+=======
+        cbKichCo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+>>>>>>> origin/master
 
         btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
@@ -650,6 +782,7 @@ public class Product extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Sản Phẩm", jPanel1);
 
+<<<<<<< HEAD
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -660,6 +793,62 @@ public class Product extends javax.swing.JFrame {
                     .addGap(115, 115, 115)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(63, Short.MAX_VALUE)))
+=======
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel12.setText("ID Loại Sản Phẩm :");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel13.setText("Tên Loại Sản Phẩm :");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel14.setText("Kích Cỡ :");
+
+        txtIDProductType.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtNameType.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtNameType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameTypeActionPerformed(evt);
+            }
+        });
+
+        btnThemLoaiSP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnThemLoaiSP.setText("Thêm Mới");
+        btnThemLoaiSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemLoaiSPActionPerformed(evt);
+            }
+        });
+
+        btnSuaLoaiSP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSuaLoaiSP.setForeground(new java.awt.Color(0, 0, 255));
+        btnSuaLoaiSP.setText("Sửa ");
+
+        btnXoaLoaiSP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnXoaLoaiSP.setForeground(new java.awt.Color(255, 0, 0));
+        btnXoaLoaiSP.setText("Xóa");
+
+        btnResetLoaiSP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnResetLoaiSP.setForeground(new java.awt.Color(102, 0, 102));
+        btnResetLoaiSP.setText("Làm Mới");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(btnThemLoaiSP)
+                .addGap(42, 42, 42)
+                .addComponent(btnSuaLoaiSP)
+                .addGap(65, 65, 65)
+                .addComponent(btnXoaLoaiSP)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(btnResetLoaiSP)
+                .addGap(6, 6, 6))
+>>>>>>> origin/master
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1072,6 +1261,10 @@ public class Product extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbChonTimKiemActionPerformed
 
+    private void aActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1108,7 +1301,11 @@ public class Product extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JPanel PanelTimKiem;
+=======
+    private javax.swing.JComboBox<String> a;
+>>>>>>> origin/master
     private javax.swing.JButton btnAddSP;
     private javax.swing.JButton btnDeleteSP;
     private javax.swing.JButton btnResetLoaiSP;
@@ -1125,9 +1322,14 @@ public class Product extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbLoaiTK;
     private javax.swing.JComboBox<String> cbNameType;
     private javax.swing.JComboBox<String> cbSizeType;
+<<<<<<< HEAD
     private javax.swing.JComboBox<String> cbTen;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+=======
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+>>>>>>> origin/master
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
