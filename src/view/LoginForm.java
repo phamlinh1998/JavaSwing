@@ -131,6 +131,8 @@ public class LoginForm extends javax.swing.JFrame {
 
         jLabel7.setText("Mật khẩu");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 51, 255));
         jLabel8.setText("Tài khoản");
 
         cbRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nhân Viên", "Quản Lý" }));
