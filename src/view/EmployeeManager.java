@@ -965,7 +965,7 @@ public class EmployeeManager extends javax.swing.JFrame {
         } else {
             DefaultTableModel model1 = (DefaultTableModel) tblEmp.getModel();
             model1.setNumRows(0);
-            Employee e = null;
+            Employee e = ed.getByUser(txtSearch.getText());
             model1.addRow(new Object[]{e.getUsernameEmp(), e.getNameEmp(), e.getGender(), e.getBirthday(), e.getPhone(), e.getEmail(), e.getAddress(), e.getHinh()});
             tblEmp.setModel(model1);
         }

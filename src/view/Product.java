@@ -66,7 +66,7 @@ public class Product extends javax.swing.JFrame {
         btnSuaLoaiSP.setEnabled(false);
 
         btnTimKiem.setVisible(false);
-        cbTen.setVisible(false);
+        txtTKTen.setVisible(false);
         PanelTimKiem.setVisible(false);
         loadcbSP();
     }
@@ -85,9 +85,6 @@ public class Product extends javax.swing.JFrame {
         DefaultComboBoxModel<String> models = new DefaultComboBoxModel<>();
         for (ProductType_Class item : data) {
             models.addElement(item.getTypeName());
-            for (int i = 0; i < 10; i++) {
-
-            }
         }
         cbNameType.setModel(models);
     }
@@ -148,7 +145,6 @@ public class Product extends javax.swing.JFrame {
         cbNameType = new javax.swing.JComboBox<String>();
         cbChonTimKiem = new javax.swing.JComboBox<String>();
         PanelTimKiem = new javax.swing.JPanel();
-        cbTen = new javax.swing.JComboBox<String>();
         lbGiaTu = new javax.swing.JLabel();
         lbDen = new javax.swing.JLabel();
         txtGiaTu = new javax.swing.JTextField();
@@ -159,6 +155,7 @@ public class Product extends javax.swing.JFrame {
         lbNhom = new javax.swing.JLabel();
         cbLoaiTK = new javax.swing.JComboBox<String>();
         cbKichThuoc = new javax.swing.JComboBox<String>();
+        txtTKTen = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         cbKichCo = new javax.swing.JComboBox<String>();
         btnTimKiem = new javax.swing.JButton();
@@ -350,7 +347,7 @@ public class Product extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -401,8 +398,6 @@ public class Product extends javax.swing.JFrame {
             }
         });
 
-        cbTen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lbGiaTu.setText("Giá từ:");
 
         lbDen.setText("Đến :");
@@ -421,7 +416,11 @@ public class Product extends javax.swing.JFrame {
 
         lbNhom.setText("Kích Thước:");
 
-        cbLoaiTK.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbLoaiTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbLoaiTKActionPerformed(evt);
+            }
+        });
 
         cbKichThuoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nhỏ", "Vừa", "Lớn" }));
 
@@ -431,29 +430,34 @@ public class Product extends javax.swing.JFrame {
             PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelTimKiemLayout.createSequentialGroup()
                 .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(cbTen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelTimKiemLayout.createSequentialGroup()
-                        .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lbNhom, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                            .addComponent(lbLoai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbGiaTu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbDen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtGiaTu)
-                            .addComponent(txtDen)
-                            .addComponent(cbLoaiTK, 0, 178, Short.MAX_VALUE)
-                            .addComponent(cbKichThuoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(18, 18, 18)
+                    .addComponent(lbNhom, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(lbLoai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbGiaTu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbDen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbVND, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                    .addComponent(lbVND1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(PanelTimKiemLayout.createSequentialGroup()
+                            .addComponent(txtGiaTu, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbVND, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(PanelTimKiemLayout.createSequentialGroup()
+                            .addComponent(txtDen, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbVND1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cbKichThuoc, javax.swing.GroupLayout.Alignment.LEADING, 0, 144, Short.MAX_VALUE)
+                        .addComponent(cbLoaiTK, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 22, Short.MAX_VALUE))
+            .addGroup(PanelTimKiemLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTKTen, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelTimKiemLayout.setVerticalGroup(
             PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelTimKiemLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cbTen, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTKTen, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbGiaTu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -483,6 +487,11 @@ public class Product extends javax.swing.JFrame {
 
         btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -636,16 +645,14 @@ public class Product extends javax.swing.JFrame {
                             .addComponent(cbKichCo, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)))
                     .addComponent(PanelTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnTimKiem))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btnTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
         );
 
         jTabbedPane1.addTab("Sản Phẩm", jPanel1);
@@ -663,11 +670,11 @@ public class Product extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 634, Short.MAX_VALUE)
+            .addGap(0, 699, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                     .addGap(71, 71, 71)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -986,7 +993,7 @@ public class Product extends javax.swing.JFrame {
     private void cbChonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChonTimKiemActionPerformed
         PanelTimKiem.setVisible(true);
         if (cbChonTimKiem.getSelectedIndex() == 0) {
-            cbTen.setVisible(false);
+            txtTKTen.setVisible(false);
             txtGiaTu.setVisible(false);
             txtDen.setVisible(false);
             cbLoaiTK.setVisible(false);
@@ -1000,46 +1007,31 @@ public class Product extends javax.swing.JFrame {
             lbVND.setVisible(false);
 
         } else if (cbChonTimKiem.getSelectedItem().equals("Tên")) {
-            cbTen.setVisible(true);
+            txtTKTen.setVisible(true);
             txtGiaTu.setVisible(false);
             txtDen.setVisible(false);
             cbLoaiTK.setVisible(false);
             cbKichThuoc.setVisible(false);
             btnTimKiem.setVisible(true);
             lbGiaTu.setVisible(false);
-            lbGiaTu.setVisible(false);
+            lbDen.setVisible(false);
             lbLoai.setVisible(false);
             lbNhom.setVisible(false);
             lbVND1.setVisible(false);
             lbVND.setVisible(false);
+            tblSP.removeAll();
 
-            cbTen.removeAllItems();
-            try {
-                String sql = "Select DISTINCT ProductName from Product";
-                PreparedStatement psTen = conn.prepareStatement(sql);
-                ResultSet rsTen = psTen.executeQuery();
-                Vector vecTen = new Vector();
-                
-                while (rsTen.next()) {
-                    vecTen.add(rsTen.getString("ProductName"));
-                }
-                JTextField text = (JTextField) cbTen.getEditor().getEditorComponent();
-                text.setText("");
-//                text.addKeyListener(new ComboListener(cbTen, vecTen));
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
-            }
         } else if (cbChonTimKiem.getSelectedItem().equals("Giá")) {
             txtGiaTu.setVisible(true);
             txtDen.setVisible(true);
-            cbTen.setVisible(false);
+            txtTKTen.setVisible(false);
             cbLoaiTK.setVisible(false);
             cbKichThuoc.setVisible(false);
-            cbTen.setVisible(false);
+            txtTKTen.setVisible(false);
             btnTimKiem.setVisible(true);
 
             lbGiaTu.setVisible(true);
-            lbGiaTu.setVisible(true);
+            lbDen.setVisible(true);
             lbLoai.setVisible(false);
             lbNhom.setVisible(false);
             lbVND1.setVisible(true);
@@ -1047,12 +1039,12 @@ public class Product extends javax.swing.JFrame {
         } else if (cbChonTimKiem.getSelectedItem().equals("Nhóm")) {
             txtGiaTu.setVisible(false);
             txtDen.setVisible(false);
-            cbTen.setVisible(false);
+            txtTKTen.setVisible(false);
             cbLoaiTK.setVisible(true);
             cbKichThuoc.setVisible(true);
             btnTimKiem.setVisible(true);
             lbGiaTu.setVisible(false);
-            lbGiaTu.setVisible(false);
+            lbDen.setVisible(false);
             lbLoai.setVisible(true);
             lbNhom.setVisible(true);
             lbVND1.setVisible(false);
@@ -1071,6 +1063,72 @@ public class Product extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cbChonTimKiemActionPerformed
+
+    private void cbLoaiTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLoaiTKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbLoaiTKActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        if (cbChonTimKiem.getSelectedItem().equals("Tên")) {
+            if (pd.getByProductName(txtTKTen.getText()) == null) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy tên sản phẩm theo yêu cầu");
+            } else {
+                {
+                    DefaultTableModel model1 = (DefaultTableModel) tblSP.getModel();
+                    model1.setNumRows(0);
+                    for (Product_CLass p : pd.getByProductName(txtTKTen.getText())) {
+                        model1.addRow(new Object[]{p.getIDProduct(), p.getProductName(), p.getIDType(), p.getPrice(), p.getSize()});
+                        tblSP.setModel(model1);
+                    }
+
+                }
+            }
+        } else if (cbChonTimKiem.getSelectedItem().equals("Giá")) {
+            while (true) {
+                if (txtGiaTu.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Giá không được để trống");
+                    return;
+                } else if (!txtPrice.getText().trim().matches("[0-9]+")) {
+                    JOptionPane.showMessageDialog(null, "Giá phải là số và lớn hơn 0");
+                    return;
+                } 
+                if (txtDen.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Giá không được để trống");
+                    return;
+                } else if (!txtPrice.getText().trim().matches("[0-9]+")) {
+                    JOptionPane.showMessageDialog(null, "Giá phải là số và lớn hơn 0");
+                    return;
+                } else if(Integer.parseInt(txtDen.getText())<Integer.parseInt(txtGiaTu.getText())){
+                    JOptionPane.showMessageDialog(null, "Giá đến phải lớn hơn giá từ");
+                }else {
+                    break;
+                }
+            }
+            if (pd.getByPrice(Integer.parseInt(txtGiaTu.getText()), Integer.parseInt(txtDen.getText())) == null) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm theo yêu cầu");
+            } else {
+                {
+                    DefaultTableModel model1 = (DefaultTableModel) tblSP.getModel();
+                    model1.setNumRows(0);
+                    for (Product_CLass p : pd.getByPrice(Integer.parseInt(txtGiaTu.getText()), Integer.parseInt(txtDen.getText()))) {
+                        model1.addRow(new Object[]{p.getIDProduct(), p.getProductName(), p.getIDType(), p.getPrice(), p.getSize()});
+                        tblSP.setModel(model1);
+                    }
+                }
+            }
+        } else if (cbChonTimKiem.getSelectedItem().equals("Nhóm")) {
+            if (pd.getByGroup(String.valueOf(cbLoaiTK.getSelectedItem()), String.valueOf(cbKichThuoc.getSelectedItem())) == null) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm theo yêu cầu");
+            } else {
+                DefaultTableModel model1 = (DefaultTableModel) tblSP.getModel();
+                model1.setNumRows(0);
+                for (Product_CLass p : pd.getByGroup(String.valueOf(cbLoaiTK.getSelectedItem()), String.valueOf(cbKichThuoc.getSelectedItem()))) {
+                    model1.addRow(new Object[]{p.getIDProduct(), p.getProductName(), p.getIDType(), p.getPrice(), p.getSize()});
+                    tblSP.setModel(model1);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1125,7 +1183,6 @@ public class Product extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbLoaiTK;
     private javax.swing.JComboBox<String> cbNameType;
     private javax.swing.JComboBox<String> cbSizeType;
-    private javax.swing.JComboBox<String> cbTen;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -1160,6 +1217,7 @@ public class Product extends javax.swing.JFrame {
     private javax.swing.JTextField txtNameType;
     private javax.swing.JTextField txtNameproduct;
     private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtTKTen;
     // End of variables declaration//GEN-END:variables
 
 }

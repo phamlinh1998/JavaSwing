@@ -56,17 +56,19 @@ public class ProductDAO {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public String getIdType(String TypeName,String Size) throws SQLException{
+
+    public String getIdType(String TypeName, String Size) throws SQLException {
         String sql = "select * from ProductType where TypeName=? and Size=?";
-        
-            ProductType_Class ptc = new ProductType_Class();
-            CallableStatement stm = conn.prepareCall(sql);
-            stm.setString(1, TypeName);
-            stm.setString(2, Size);
-            ResultSet rs = stm.executeQuery();
-            String IDType = rs.getString("IDType");
+
+        ProductType_Class ptc = new ProductType_Class();
+        CallableStatement stm = conn.prepareCall(sql);
+        stm.setString(1, TypeName);
+        stm.setString(2, Size);
+        ResultSet rs = stm.executeQuery();
+        String IDType = rs.getString("IDType");
         return IDType;
     }
+
     public void them(Product_CLass p) {
         try {
 //            ProductType_Class ptc = new ProductType_Class();
@@ -85,5 +87,74 @@ public class ProductDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public List<Product_CLass> getByProductName(String tensp) {
+        String sql = "select * from Product p inner join ProductType pt on p.IDType = pt.IDType where ProductName like ?";
+        List<Product_CLass> data = new ArrayList<>();
+        try {
+            CallableStatement cs = conn.prepareCall(sql);
+            cs.setObject(1, tensp);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                Product_CLass p = new Product_CLass();
+                p.setIDProduct(rs.getString("IDProduct"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setIDType(rs.getString("IDType"));
+                p.setPrice(rs.getInt("Price"));
+                p.setSize(rs.getString("Size"));
+                data.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+    public List<Product_CLass> getByPrice(int a, int b) {
+        String sql = "select * from Product p inner join ProductType pt on p.IDType = pt.IDType where Price BETWEEN ? and ?";
+        List<Product_CLass> data = new ArrayList<>();
+        try {
+            CallableStatement cs = conn.prepareCall(sql);
+            cs.setObject(1, a);
+            cs.setObject(2, b);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                Product_CLass p = new Product_CLass();
+                p.setIDProduct(rs.getString("IDProduct"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setIDType(rs.getString("IDType"));
+                p.setPrice(rs.getInt("Price"));
+                p.setSize(rs.getString("Size"));
+                data.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+    public List<Product_CLass> getByGroup(String tensp, String kichthuoc) {
+        String sql = "select * from Product p inner join ProductType pt on p.IDType = pt.IDType where TypeName=? and Size=?";
+        List<Product_CLass> data = new ArrayList<>();
+        try {
+            CallableStatement cs = conn.prepareCall(sql);
+            cs.setObject(1, tensp);
+            cs.setObject(2, kichthuoc);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                Product_CLass p = new Product_CLass();
+                p.setIDProduct(rs.getString("IDProduct"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setIDType(rs.getString("IDType"));
+                p.setPrice(rs.getInt("Price"));
+                p.setSize(rs.getString("Size"));
+                data.add(p);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
     }
 }
