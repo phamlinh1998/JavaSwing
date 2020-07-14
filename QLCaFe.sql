@@ -104,3 +104,14 @@ Insert into Customer values('122261551',N'Vũ Văn Tùng','17/04/2017','01212692
 Insert into Customer values('122261552',N'Nguyễn Huỳnh Thanh Tùng','23/04/2017','01212692802','thanhtung@gmail.com',25,10)
 Insert into Customer values('122261553',N'Nguyễn Ngân','20/04/2017','01212692802','nguyenngan@gmail.com',19,5)
 Insert into Customer values('122261554',N'Nguyễn Văn Trí','11/04/2017','01212692802','tri@gmail.com',10,5)
+
+select * from Orders
+--Insert 6 Order
+Insert into Orders values('HD0001','11/04/2017','19:49:50','vutung')
+Insert into Orders values('HD0002','20/12/2016','22:43:50','vutung')
+--Insert 10 OrderDetails
+Insert into OrderDetails values('HD0001','CF02',N'100003',4,N'Khách hàng VIP')
+
+select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
+from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
+where OrderDetails.IDOrder LIKE ? or OrderDetails.IDProduct LIKE ? or OrderDetails.CusName LIKE ? or OrderDetails.NamePromo LIKE ? or [Orders].DateOrder LIKE ? or [Orders].UsernameEmp LIKE ? Order by OrderDetails.IDOrder DESC
