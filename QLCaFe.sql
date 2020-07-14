@@ -96,3 +96,11 @@ Insert into Product values('CF02', N'Cà phê đá', 'T02', 25000)
 Insert into Product values('CF03', N'Cà phê đá', 'T03', 30000)
 
 Insert into Employee values('vutung','123456',N'Vũ Văn Tùng',N'Nam','01/01/1996','0124566789','tung@gmail.com',N'Dĩ an','2.jpg')
+
+select * from Product p inner join ProductType pt on p.IDType = pt.IDType where ProductName like N'Cà phê đá'
+select * from Product p inner join ProductType pt on p.IDType = pt.IDType where Price BETWEEN 25000 and 30000
+select * from ProductType
+Insert into Customer values('122261551',N'Vũ Văn Tùng','17/04/2017','01212692802','tung@gmail.com',20,10)
+Insert into Customer values('122261552',N'Nguyễn Huỳnh Thanh Tùng','23/04/2017','01212692802','thanhtung@gmail.com',25,10)
+Insert into Customer values('122261553',N'Nguyễn Ngân','20/04/2017','01212692802','nguyenngan@gmail.com',19,5)
+Insert into Customer values('122261554',N'Nguyễn Văn Trí','11/04/2017','01212692802','tri@gmail.com',10,5)
