@@ -114,4 +114,4 @@ Insert into OrderDetails values('HD0001','CF02',N'100003',4,N'Khách hàng VIP')
 
 select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
 from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
-where OrderDetails.IDOrder LIKE ? or OrderDetails.IDProduct LIKE ? or OrderDetails.CusName LIKE ? or OrderDetails.NamePromo LIKE ? or [Orders].DateOrder LIKE ? or [Orders].UsernameEmp LIKE ? Order by OrderDetails.IDOrder DESC
+where OrderDetails.IDOrder LIKE 'HD0001' or OrderDetails.IDProduct LIKE 'CF02' or OrderDetails.CusName LIKE N'100003' or OrderDetails.NamePromo LIKE N'Khách hàng VIP' or [Orders].DateOrder LIKE '11/04/2017' or [Orders].UsernameEmp LIKE 'vutung' Order by OrderDetails.IDOrder DESC
