@@ -46,26 +46,33 @@ public class OrderDAO {
         return data;
     }
 
-    public List<Order_Class> TimKiem(String IDOrder, String IDProduct,String CusName,String NamePromo,String DateOrder,String UsernameEmp ) {
-//        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp "
-//                + "from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
-//                + "where OrderDetails.IDOrder LIKE ? or OrderDetails.IDProduct LIKE ? or OrderDetails.CusName LIKE ? "
-//                + "or OrderDetails.NamePromo LIKE ? or [Orders].DateOrder LIKE ? "
-//                + "or [Orders].UsernameEmp LIKE ? ";
-        String sql = "{call TimKiem_Order(?,?,?,?,?,?)}";
+    public List<Order_Class> TimKiem(String IDOrder, String IDProduct, String CusName, String NamePromo, String DateOrder, String UsernameEmp) {
+        String sql = "select OrderDetails.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join Orders on OrderDetails.IDOrder=Orders.IDOrder where";
         List<Order_Class> data = new ArrayList<>();
-        
         try {
-            Order_Class oc=new Order_Class();
-            CallableStatement stm = conn.prepareCall(sql);
-            stm.setString(1, IDOrder);
-            stm.setString(2, IDProduct);
-            stm.setString(3, CusName);
-            stm.setString(4, NamePromo);
-            stm.setString(5, DateOrder);
-            stm.setString(6, UsernameEmp);
+            if (IDOrder != "") {
+                sql = sql + " OrderDetails.IDOrder LIKE IDOrder";
+            } else if (IDProduct != "") {
+                sql = sql + " OrderDetails.IDProduct LIKE IDProduct";
+            } else if (CusName != "") {
+                sql = sql + " OrderDetails.CusName LIKE CusName ";
+            } else if (NamePromo != "") {
+                sql = sql + " OrderDetails.NamePromo LIKE NamePromo";
+            } else if (DateOrder != "") {
+                sql =sql + " Orders.DateOrder LIKE DateOrder";
+            } else if (UsernameEmp != "") {
+                sql =sql + " Orders.UsernameEmp LIKE UsernameEmp ";
+            }
+            PreparedStatement stm = conn.prepareStatement(sql);
+//            stm.setString(1, IDOrder);
+//            stm.setString(2, IDProduct);
+//            stm.setString(3, CusName);
+//            stm.setString(4, NamePromo);
+//            stm.setString(5, DateOrder);
+//            stm.setString(6, UsernameEmp);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) { 
+            while (rs.next()) {
+                Order_Class oc = new Order_Class();
                 oc.setIDOrder(rs.getString("IDOrder"));
                 oc.setIDProduct(rs.getString("IDProduct"));
                 oc.setCusName(rs.getString("CusName"));
@@ -81,9 +88,166 @@ public class OrderDAO {
         }
         return data;
     }
+
+    public List<Order_Class> TimKiem_IDOrder(String IDOrder) {
+        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+                + "Where OrderDetails.IDOrder LIKE ?";
+        List<Order_Class> data = new ArrayList<>();
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, IDOrder);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Order_Class oc = new Order_Class();
+                oc.setIDOrder(rs.getString("IDOrder"));
+                oc.setIDProduct(rs.getString("IDProduct"));
+                oc.setCusName(rs.getString("CusName"));
+                oc.setQuantity(rs.getInt("Quantity"));
+                oc.setNamePromo(rs.getString("NamePromo"));
+                oc.setTimeOrder(rs.getString("TimeOrder"));
+                oc.setDateOrder(rs.getString("DateOrder"));
+                oc.setUsernameEmp(rs.getString("UsernameEmp"));
+                data.add(oc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+    public List<Order_Class> TimKiem_IDProduct(String IDProduct) {
+        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+                + "Where OrderDetails.IDProduct LIKE ?";
+        List<Order_Class> data = new ArrayList<>();
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, IDProduct);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Order_Class oc = new Order_Class();
+                oc.setIDOrder(rs.getString("IDOrder"));
+                oc.setIDProduct(rs.getString("IDProduct"));
+                oc.setCusName(rs.getString("CusName"));
+                oc.setQuantity(rs.getInt("Quantity"));
+                oc.setNamePromo(rs.getString("NamePromo"));
+                oc.setTimeOrder(rs.getString("TimeOrder"));
+                oc.setDateOrder(rs.getString("DateOrder"));
+                oc.setUsernameEmp(rs.getString("UsernameEmp"));
+                data.add(oc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+    public List<Order_Class> TimKiem_NamePromo(String NamePromo) {
+        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+                + "Where OrderDetails.NamePromo LIKE ? Order By Orders.IDOrder DESC";
+        List<Order_Class> data = new ArrayList<>();
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, NamePromo);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Order_Class oc = new Order_Class();
+                oc.setIDOrder(rs.getString("IDOrder"));
+                oc.setIDProduct(rs.getString("IDProduct"));
+                oc.setCusName(rs.getString("CusName"));
+                oc.setQuantity(rs.getInt("Quantity"));
+                oc.setNamePromo(rs.getString("NamePromo"));
+                oc.setTimeOrder(rs.getString("TimeOrder"));
+                oc.setDateOrder(rs.getString("DateOrder"));
+                oc.setUsernameEmp(rs.getString("UsernameEmp"));
+                data.add(oc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+    public List<Order_Class> TimKiem_DateOrder(String DateOrder) {
+        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+                + "Where Orders.DateOrder LIKE ?";
+        List<Order_Class> data = new ArrayList<>();
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, DateOrder);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Order_Class oc = new Order_Class();
+                oc.setIDOrder(rs.getString("IDOrder"));
+                oc.setIDProduct(rs.getString("IDProduct"));
+                oc.setCusName(rs.getString("CusName"));
+                oc.setQuantity(rs.getInt("Quantity"));
+                oc.setNamePromo(rs.getString("NamePromo"));
+                oc.setTimeOrder(rs.getString("TimeOrder"));
+                oc.setDateOrder(rs.getString("DateOrder"));
+                oc.setUsernameEmp(rs.getString("UsernameEmp"));
+                data.add(oc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+    public List<Order_Class> TimKiem_UsernameEmp(String UsernameEmp) {
+        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+                + "Where [Orders].UsernameEmp LIKE ? Order By Orders.IDOrder DESC";
+        List<Order_Class> data = new ArrayList<>();
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, UsernameEmp);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Order_Class oc = new Order_Class();
+                oc.setIDOrder(rs.getString("IDOrder"));
+                oc.setIDProduct(rs.getString("IDProduct"));
+                oc.setCusName(rs.getString("CusName"));
+                oc.setQuantity(rs.getInt("Quantity"));
+                oc.setNamePromo(rs.getString("NamePromo"));
+                oc.setTimeOrder(rs.getString("TimeOrder"));
+                oc.setDateOrder(rs.getString("DateOrder"));
+                oc.setUsernameEmp(rs.getString("UsernameEmp"));
+                data.add(oc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+    public List<Order_Class> TimKiem_CusName(String CusName) {
+        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+                + "Where OrderDetails.CusName LIKE ?";
+        List<Order_Class> data = new ArrayList<>();
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, CusName);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Order_Class oc = new Order_Class();
+                oc.setIDOrder(rs.getString("IDOrder"));
+                oc.setIDProduct(rs.getString("IDProduct"));
+                oc.setCusName(rs.getString("CusName"));
+                oc.setQuantity(rs.getInt("Quantity"));
+                oc.setNamePromo(rs.getString("NamePromo"));
+                oc.setTimeOrder(rs.getString("TimeOrder"));
+                oc.setDateOrder(rs.getString("DateOrder"));
+                oc.setUsernameEmp(rs.getString("UsernameEmp"));
+                data.add(oc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
     public List<Order_Class> getByIDOrder() {
         List<Order_Class> data = new ArrayList<>();
-        String sql="select IDOrder from Orders";
+        String sql = "select IDOrder from Orders";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
@@ -97,9 +261,10 @@ public class OrderDAO {
         }
         return data;
     }
+
     public List<Order_Class> getByIDProduct() {
         List<Order_Class> data = new ArrayList<>();
-        String sql="select IDProduct from OrderDetails";
+        String sql = "select IDProduct from OrderDetails";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
@@ -113,9 +278,10 @@ public class OrderDAO {
         }
         return data;
     }
+
     public List<Order_Class> getByCusName() {
         List<Order_Class> data = new ArrayList<>();
-        String sql="select CusName from OrderDetails";
+        String sql = "select distinct CusName from OrderDetails";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
@@ -129,9 +295,10 @@ public class OrderDAO {
         }
         return data;
     }
+
     public List<Order_Class> getByNamePromo() {
         List<Order_Class> data = new ArrayList<>();
-        String sql="select NamePromo from OrderDetails";
+        String sql = "select distinct  NamePromo from OrderDetails";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
@@ -145,9 +312,10 @@ public class OrderDAO {
         }
         return data;
     }
+
     public List<Order_Class> getByDateOrder() {
         List<Order_Class> data = new ArrayList<>();
-        String sql="select DateOrder from OrderDetails";
+        String sql = "select DateOrder from OrderDetails";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
@@ -161,9 +329,10 @@ public class OrderDAO {
         }
         return data;
     }
+
     public List<Order_Class> getByUsernameEmp() {
         List<Order_Class> data = new ArrayList<>();
-        String sql="select Distinct UsernameEmp from Orders";
+        String sql = "select Distinct UsernameEmp from Orders";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
@@ -178,4 +347,3 @@ public class OrderDAO {
         return data;
     }
 }
-
