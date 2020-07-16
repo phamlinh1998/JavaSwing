@@ -47,14 +47,16 @@ public class OrderDAO {
     }
 
     public List<Order_Class> TimKiem(String IDOrder, String IDProduct,String CusName,String NamePromo,String DateOrder,String UsernameEmp ) {
-        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp "
-                + "from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
-                + "where OrderDetails.IDOrder LIKE ? or OrderDetails.IDProduct LIKE ? or OrderDetails.CusName LIKE ? "
-                + "or OrderDetails.NamePromo LIKE ? or [Orders].DateOrder LIKE ?"
-                + "or [Orders].UsernameEmp LIKE ? Order by OrderDetails.IDOrder DESC";
+//        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp "
+//                + "from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+//                + "where OrderDetails.IDOrder LIKE ? or OrderDetails.IDProduct LIKE ? or OrderDetails.CusName LIKE ? "
+//                + "or OrderDetails.NamePromo LIKE ? or [Orders].DateOrder LIKE ? "
+//                + "or [Orders].UsernameEmp LIKE ? ";
+        String sql = "{call TimKiem_Order(?,?,?,?,?,?)}";
         List<Order_Class> data = new ArrayList<>();
-        Order_Class oc = null;
+        
         try {
+            Order_Class oc=new Order_Class();
             CallableStatement stm = conn.prepareCall(sql);
             stm.setString(1, IDOrder);
             stm.setString(2, IDProduct);
@@ -63,9 +65,15 @@ public class OrderDAO {
             stm.setString(5, DateOrder);
             stm.setString(6, UsernameEmp);
             ResultSet rs = stm.executeQuery();
-            int quantity = rs.getInt("Quantity");
-            while (rs.next()) {  
-                oc = new Order_Class(IDOrder, IDProduct, quantity, NamePromo, DateOrder, DateOrder, UsernameEmp);
+            while (rs.next()) { 
+                oc.setIDOrder(rs.getString("IDOrder"));
+                oc.setIDProduct(rs.getString("IDProduct"));
+                oc.setCusName(rs.getString("CusName"));
+                oc.setQuantity(rs.getInt("Quantity"));
+                oc.setNamePromo(rs.getString("NamePromo"));
+                oc.setTimeOrder(rs.getString("TimeOrder"));
+                oc.setDateOrder(rs.getString("DateOrder"));
+                oc.setUsernameEmp(rs.getString("UsernameEmp"));
                 data.add(oc);
             }
         } catch (SQLException ex) {

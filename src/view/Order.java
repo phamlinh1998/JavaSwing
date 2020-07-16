@@ -12,6 +12,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import DAO.OrderDAO;
 import entities.Order_Class;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -123,9 +124,7 @@ public class Order extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cbPromotions = new javax.swing.JComboBox<String>();
         cbIDCus = new javax.swing.JComboBox<String>();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtTime = new javax.swing.JTextField();
         txtDate = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
@@ -158,6 +157,23 @@ public class Order extends javax.swing.JFrame {
                 cbIDOrderMousePressed(evt);
             }
         });
+        cbIDOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbIDOrderActionPerformed(evt);
+            }
+        });
+
+        cbIDProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbIDProductActionPerformed(evt);
+            }
+        });
+
+        cbNameEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNameEmpActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 0, 255));
@@ -168,9 +184,17 @@ public class Order extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Mã khách hàng:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 204, 0));
-        jLabel7.setText("Thời gian:");
+        cbPromotions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPromotionsActionPerformed(evt);
+            }
+        });
+
+        cbIDCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbIDCusActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 204, 0));
@@ -235,15 +259,11 @@ public class Order extends javax.swing.JFrame {
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtTime)
-                                            .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                                        .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -253,13 +273,12 @@ public class Order extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbIDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbPromotions, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbPromotions, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbIDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -295,8 +314,14 @@ public class Order extends javax.swing.JFrame {
         cbIDProduct.setSelectedIndex(-1);
         cbNameEmp.setSelectedIndex(-1);
         cbPromotions.setSelectedIndex(-1);
-        txtTime.setText("");
         txtDate.setText("");
+        cbIDCus.setEnabled(true);
+        cbIDProduct.setEnabled(true);
+        cbPromotions.setEnabled(true);
+        cbNameEmp.setEnabled(true);
+        txtDate.setEnabled(true);
+        cbIDOrder.setEnabled(true);
+        loadtblOrder();
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void cbIDOrderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbIDOrderMousePressed
@@ -309,20 +334,85 @@ public class Order extends javax.swing.JFrame {
         String IDProduct = (String) cbIDProduct.getSelectedItem();
         String CusName = (String) cbIDCus.getSelectedItem();
         String NamePromo = (String) cbPromotions.getSelectedItem();
-        String DateOrder = txtDate.getText().trim();
+        if (!txtDate.getText().trim().equals("")) {
+            while (true) {
+                if (!txtDate.getText().trim().matches("([0-9]{0,2}/)?([0-9]{0,2}/)?[0-9]{4}")) {
+                    JOptionPane.showMessageDialog(null, "Ngày có dạng: ngày/tháng/năm");
+                    return;
+                } else {
+                    break;
+                }
+            }
+        }
+        String DateOrder = txtDate.getText();
         String UsernameEmp = (String) cbNameEmp.getSelectedItem();
+        if (cbIDOrder.getSelectedIndex() <= 0) {
+            IDOrder = null;
+        }
+        if (cbIDProduct.getSelectedIndex() <= 0) {
+            IDProduct = null;
+        }
+        if (cbIDCus.getSelectedIndex() <= 0) {
+            CusName = null;
+        }
+        if (cbPromotions.getSelectedIndex() <= 0) {
+            NamePromo = null;
+        }
         tblOrder.removeAll();
-        if (od.TimKiem(IDOrder, IDProduct, CusName, NamePromo, DateOrder, UsernameEmp)==null) {
+        List<Order_Class> data = new ArrayList<>();
+        data = od.TimKiem(IDOrder, IDProduct, CusName, NamePromo, DateOrder, UsernameEmp);
+        if (data == null) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin theo yêu cầu");
         } else {
             DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
             model.setNumRows(0);
-            for (Order_Class oc : od.TimKiem(IDOrder, IDProduct, CusName, NamePromo, DateOrder, UsernameEmp)) {
+            for (Order_Class oc : data) {
                 model.addRow(new Object[]{oc.getIDOrder(), oc.getIDProduct(), oc.getCusName(), oc.getQuantity(), oc.getNamePromo(), oc.getTimeOrder(), oc.getDateOrder(), oc.getUsernameEmp()});
                 tblOrder.setModel(model);
             }
         }
+
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void cbIDOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIDOrderActionPerformed
+        cbIDCus.setEnabled(false);
+        cbIDProduct.setEnabled(false);
+        cbPromotions.setEnabled(false);
+        cbNameEmp.setEnabled(false);
+        txtDate.setEnabled(false);
+    }//GEN-LAST:event_cbIDOrderActionPerformed
+
+    private void cbIDProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIDProductActionPerformed
+        cbIDCus.setEnabled(false);
+        cbIDOrder.setEnabled(false);
+        cbPromotions.setEnabled(false);
+        cbNameEmp.setEnabled(false);
+        txtDate.setEnabled(false);
+    }//GEN-LAST:event_cbIDProductActionPerformed
+
+    private void cbNameEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNameEmpActionPerformed
+        cbIDCus.setEnabled(false);
+        cbIDOrder.setEnabled(false);
+        cbPromotions.setEnabled(false);
+        cbIDProduct.setEnabled(false);
+        txtDate.setEnabled(false);
+    }//GEN-LAST:event_cbNameEmpActionPerformed
+
+    private void cbPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPromotionsActionPerformed
+        cbIDCus.setEnabled(false);
+        cbIDOrder.setEnabled(false);
+        cbNameEmp.setEnabled(false);
+        cbIDProduct.setEnabled(false);
+        txtDate.setEnabled(false);
+    }//GEN-LAST:event_cbPromotionsActionPerformed
+
+    private void cbIDCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIDCusActionPerformed
+        cbPromotions.setEnabled(false);
+        cbIDOrder.setEnabled(false);
+        cbNameEmp.setEnabled(false);
+        cbIDProduct.setEnabled(false);
+        txtDate.setEnabled(false);
+    }//GEN-LAST:event_cbIDCusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,11 +464,9 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOrder;
     private javax.swing.JTextField txtDate;
-    private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
 }

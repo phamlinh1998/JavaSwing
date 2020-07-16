@@ -78,6 +78,53 @@ Create Table OrderDetails(
 	Constraint PK_OrderDetails Primary key (IDOrder,IDProduct)
 )
 go
+
+CREATE PROC TimKiem_Order
+	@IDOrder varchar(20),
+	@IDProduct varchar(20),
+	@CusName nvarchar(50),
+	@NamePromo nvarchar(50),
+	@DateOrder varchar(20),
+	@UsernameEmp varchar(50)
+AS 
+BEGIN 
+	if(@IDOrder!=null)
+		BEGIN
+			select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
+			from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
+			where   [Orders].UsernameEmp LIKE @IDOrder
+		END
+	if(@IDProduct!=null)
+		BEGIN
+			select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
+			from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
+			where   OrderDetails.IDProduct LIKE @IDProduct
+		END
+	if(@CusName!=null)
+		BEGIN
+			select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
+			from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
+			where   OrderDetails.CusName LIKE @CusName
+		END
+	if(@NamePromo!=null)
+		BEGIN
+			select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
+			from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
+			where   OrderDetails.NamePromo LIKE @NamePromo
+		END
+	if(@DateOrder!=null)
+		BEGIN
+			select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
+			from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
+			where   Orders.DateOrder LIKE @DateOrder
+		END
+	if(@UsernameEmp!=null)
+		BEGIN
+			select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
+			from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
+			where   Orders.UsernameEmp LIKE @UsernameEmp
+		END 
+END 
 --Insert 1 Administrators
 Insert into Administrator values('admin','admin')
 --Insert ProductType
@@ -111,7 +158,12 @@ Insert into Orders values('HD0001','11/04/2017','19:49:50','vutung')
 Insert into Orders values('HD0002','20/12/2016','22:43:50','vutung')
 --Insert 10 OrderDetails
 Insert into OrderDetails values('HD0001','CF02',N'100003',4,N'Khách hàng VIP')
+Insert into OrderDetails values('HD0002','CF03',N'100003',5,N'Khách hàng VIP')
+
+Insert into Revenue values('10/04/2019','179000')
+Insert into Revenue values('13/03/2020','50000')
+Insert into Revenue values('15/12/2018','206000')
 
 select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
 from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
-where OrderDetails.IDOrder LIKE 'HD0001' or OrderDetails.IDProduct LIKE 'CF02' or OrderDetails.CusName LIKE N'100003' or OrderDetails.NamePromo LIKE N'Khách hàng VIP' or [Orders].DateOrder LIKE '11/04/2017' or [Orders].UsernameEmp LIKE 'vutung' Order by OrderDetails.IDOrder DESC
+where   [Orders].UsernameEmp LIKE 'vutung' 
