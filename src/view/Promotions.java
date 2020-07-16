@@ -5,6 +5,17 @@
  */
 package view;
 
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+import entities.Promotion_Class;
+import DAO.PromotionDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
@@ -14,8 +25,34 @@ public class Promotions extends javax.swing.JFrame {
     /**
      * Creates new form Promotions
      */
+    PromotionDAO pd;
+    SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy");
+
     public Promotions() {
         initComponents();
+        pd = new PromotionDAO();
+        ImageIcon img = new ImageIcon("image//Promotions.jpg");
+        this.setIconImage(img.getImage());
+        btnAdd.setSize(20, 20);
+        new setImage().setImageButton(btnAdd, "image//floating-toucher_icon.png");
+        btnUpdate.setSize(20, 20);
+        new setImage().setImageButton(btnUpdate, "image//Setting-icon.png");
+        btnDel.setSize(20, 20);
+        new setImage().setImageButton(btnDel, "image//deleted.png");
+        btnReset.setSize(20, 20);
+        new setImage().setImageButton(btnReset, "image//3a4a6aea2a19c76c632a9092e7fd9a3f.png");
+        loadTTtblPromo();
+        btnDel.setEnabled(false);
+        btnUpdate.setEnabled(false);
+    }
+
+    public void loadTTtblPromo() {
+        DefaultTableModel model = (DefaultTableModel) tblPromo.getModel();
+        model.setNumRows(0);
+        for (Promotion_Class pc : pd.getAll()) {
+            model.addRow(new Object[]{pc.getIDPromo(), pc.getNamePromo(), pc.getDiscountPromo(), pc.getStartPromo(), pc.getEndPromo(), pc.getDescription()});
+            tblPromo.setModel(model);
+        }
     }
 
     /**
@@ -33,20 +70,20 @@ public class Promotions extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtDis = new javax.swing.JTextField();
         lbID = new javax.swing.JLabel();
+        txtDis = new javax.swing.JTextField();
+        lbID1 = new javax.swing.JLabel();
         DateStart = new com.toedter.calendar.JDateChooser();
         DateEnd = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescription = new javax.swing.JTextArea();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDel = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblPromo = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý chương trình khuyến mại");
@@ -71,23 +108,28 @@ public class Promotions extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 255));
         jLabel5.setText("Ngày kết thúc:");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel6.setText("Mã:");
-
         lbID.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbID.setForeground(new java.awt.Color(255, 0, 0));
-        lbID.setText("Tự động");
+        lbID.setForeground(new java.awt.Color(0, 0, 255));
+        lbID.setText("Mã:");
+
+        lbID1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbID1.setForeground(new java.awt.Color(255, 0, 0));
+        lbID1.setText("Tự động");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("Mô tả:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtDescription.setColumns(20);
+        txtDescription.setRows(5);
+        jScrollPane1.setViewportView(txtDescription);
 
         btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("Cập Nhật");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -97,21 +139,33 @@ public class Promotions extends javax.swing.JFrame {
         });
 
         btnDel.setText("Xóa");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         btnReset.setText("Làm Mới");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPromo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã", "Tên chương trình", "Chiết khấu", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        tblPromo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPromoMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblPromo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,9 +183,9 @@ public class Promotions extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lbID, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lbID1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -143,22 +197,21 @@ public class Promotions extends javax.swing.JFrame {
                                             .addComponent(DateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(DateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnAdd)
-                                                .addGap(73, 73, 73)
-                                                .addComponent(btnUpdate)
+                                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(35, 35, 35)
+                                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(71, 71, 71)
-                                        .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(76, 76, 76)
-                                        .addComponent(btnReset)))))
-                        .addGap(0, 21, Short.MAX_VALUE)))
+                                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -190,14 +243,14 @@ public class Promotions extends javax.swing.JFrame {
                     .addComponent(DateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbID1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnUpdate)
                     .addComponent(btnDel)
-                    .addComponent(btnReset))
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -208,8 +261,154 @@ public class Promotions extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        int click = JOptionPane.showConfirmDialog(null, "Bạn muốn cập nhật chương trình này?");
+        if (click == 0) {
+            pd.capnhat(Integer.parseInt(txtDis.getText()), ft.format(DateStart.getDate()), ft.format(DateEnd.getDate()), txtDescription.getText(), lbID1.getText());
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công");
+            loadTTtblPromo();
+            txtName.setText("");
+            txtDis.setText("");
+            txtDescription.setText("");
+            btnDel.setEnabled(false);
+            btnUpdate.setEnabled(false);
+            btnAdd.setEnabled(true);
+            lbID1.setVisible(false);
+            lbID.setVisible(false);
+            txtName.setEnabled(true);
+            DateStart.setDate(null);
+            DateEnd.setDate(null);
+        } else {
+            JOptionPane.showMessageDialog(null, "Cập nhật không thành công");
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        txtName.setText("");
+        txtDis.setText("");
+        txtDescription.setText("");
+        btnDel.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        btnAdd.setEnabled(true);
+        lbID1.setVisible(false);
+        lbID.setVisible(false);
+        txtName.setEnabled(true);
+        DateStart.setDate(null);
+        DateEnd.setDate(null);
+        loadTTtblPromo();
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm Chương trình khuyến mại không ?");
+        int line = tblPromo.getRowCount();
+        String name = txtName.getText().replaceAll("\\s+", " ");
+        int chietkhau = Integer.parseInt(txtDis.getText().trim());
+        String descript = txtDescription.getText();
+        String start = ft.format(DateStart.getDate());
+        String end = ft.format(DateEnd.getDate());
+        if (click == 0) {
+
+            try {
+                while (true) {
+                    if (name.trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Tên chương trình không được bỏ trống.");
+                        txtName.grabFocus();
+                        return;
+                    } else if (name.length() > 50) {
+                        JOptionPane.showMessageDialog(null, "Độ dài tối đa của tên chương trình là 50 ký tự.");
+                        txtName.grabFocus();
+                        return;
+                    } else {
+                        break;
+                    }
+                }
+                while (true) {
+                    if (txtDis.getText().trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Chiết khấu không được bỏ trống.");
+                        txtDis.grabFocus();
+                        return;
+                    } else if (!txtDis.getText().trim().matches("[0-9]+") || Integer.parseInt(txtDis.getText().trim()) > 100) {
+                        JOptionPane.showMessageDialog(null, "Chiết khấu phải là số nguyên dương và <= 100.");
+                        txtDis.grabFocus();
+                        return;
+                    } else {
+                        break;
+                    }
+                }
+                while (true) {
+                    if (start.compareTo(end) >= 0) {
+                        JOptionPane.showMessageDialog(null, "Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc.");
+                        return;
+                    } else {
+                        break;
+                    }
+                }
+                while (true) {
+                    if (descript.trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Mô tả chương trình không được bỏ trống.");
+                        txtDescription.grabFocus();
+                        return;
+                    } else {
+                        break;
+                    }
+                }
+                pd.them(name, chietkhau, start, end, descript);
+                loadTTtblPromo();
+                JOptionPane.showMessageDialog(null, "Thêm thông tin thành công");
+            } catch (Exception e) {
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Thêm chương trình khuyến mãi thất bại");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void tblPromoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPromoMouseClicked
+        try {
+            btnAdd.setEnabled(false);
+            btnUpdate.setEnabled(true);
+            btnDel.setEnabled(true);
+            txtName.setEnabled(false);
+            lbID1.setVisible(true);
+            lbID.setVisible(true);
+            int line = tblPromo.getSelectedRow();
+            String ID = String.valueOf(tblPromo.getValueAt(line, 0));
+            String ten = (String) tblPromo.getValueAt(line, 1);
+            String ck = String.valueOf(tblPromo.getValueAt(line, 2));
+            Date start = ft.parse((String) tblPromo.getValueAt(line, 3));
+            Date end = ft.parse((String) tblPromo.getValueAt(line, 4));
+            String mota = (String) tblPromo.getValueAt(line, 5);
+            //gan du lieu vao textfile
+            txtName.setText(ten);
+            txtDescription.setText(mota);
+            txtDis.setText(ck);
+            DateStart.setDate(start);
+            DateEnd.setDate(end);
+            lbID.setEnabled(true);
+            lbID1.setText(ID);
+        } catch (ParseException ex) {
+            Logger.getLogger(Promotions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tblPromoMouseClicked
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        int click = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn xóa chương trình này?");
+        if (click == 0) {
+            pd.xoa(lbID1.getText());
+            loadTTtblPromo();
+            JOptionPane.showMessageDialog(null, "Xóa chương trình thành công!");
+            txtName.setText("");
+            txtDis.setText("");
+            txtDescription.setText("");
+            btnDel.setEnabled(false);
+            btnUpdate.setEnabled(false);
+            btnAdd.setEnabled(true);
+            lbID1.setVisible(false);
+            lbID.setVisible(false);
+            txtName.setEnabled(true);
+            DateStart.setDate(null);
+            DateEnd.setDate(null);
+        }
+    }//GEN-LAST:event_btnDelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,13 +457,13 @@ public class Promotions extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbID;
+    private javax.swing.JLabel lbID1;
+    private javax.swing.JTable tblPromo;
+    private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtDis;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
