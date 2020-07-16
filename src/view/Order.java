@@ -321,6 +321,7 @@ public class Order extends javax.swing.JFrame {
         cbNameEmp.setEnabled(true);
         txtDate.setEnabled(true);
         cbIDOrder.setEnabled(true);
+        btnSearch.removeAll();
         loadtblOrder();
     }//GEN-LAST:event_btnResetActionPerformed
 
@@ -344,33 +345,106 @@ public class Order extends javax.swing.JFrame {
                 }
             }
         }
-        String DateOrder = txtDate.getText();
+        String DateOrder = (String) txtDate.getText();
         String UsernameEmp = (String) cbNameEmp.getSelectedItem();
-        if (cbIDOrder.getSelectedIndex() <= 0) {
-            IDOrder = null;
-        }
-        if (cbIDProduct.getSelectedIndex() <= 0) {
-            IDProduct = null;
-        }
-        if (cbIDCus.getSelectedIndex() <= 0) {
-            CusName = null;
-        }
-        if (cbPromotions.getSelectedIndex() <= 0) {
-            NamePromo = null;
-        }
         tblOrder.removeAll();
         List<Order_Class> data = new ArrayList<>();
-        data = od.TimKiem(IDOrder, IDProduct, CusName, NamePromo, DateOrder, UsernameEmp);
-        if (data == null) {
+//        if (cbIDOrder.getSelectedIndex() <= 0) {
+//            IDOrder = "";
+//        }
+//        if (cbIDProduct.getSelectedIndex() <= 0) {
+//            IDProduct = "";
+//        }
+//
+//        if (cbIDCus.getSelectedIndex() <= 0) {
+//            CusName = "";
+//        }
+//        if (cbPromotions.getSelectedIndex() <= 0) {
+//            NamePromo = "";
+//        }
+//        if (cbNameEmp.getSelectedIndex() <= 0) {
+//            UsernameEmp = "";
+//        }
+//        data = od.TimKiem(IDOrder, IDProduct, CusName, NamePromo, DateOrder, UsernameEmp);
+//        DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+//        model.setNumRows(0);
+//        for (Order_Class oc : data) {
+//            model.addRow(new Object[]{oc.getIDOrder(), oc.getIDProduct(), oc.getCusName(), oc.getQuantity(), oc.getNamePromo(), oc.getTimeOrder(), oc.getDateOrder(), oc.getUsernameEmp()});
+//            tblOrder.setModel(model);
+//        }
+        
+        
+        
+        
+        if (IDOrder == "" && IDProduct == "" && CusName == "" && NamePromo == "" && UsernameEmp == "") {
             JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin theo yêu cầu");
         } else {
-            DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
-            model.setNumRows(0);
-            for (Order_Class oc : data) {
-                model.addRow(new Object[]{oc.getIDOrder(), oc.getIDProduct(), oc.getCusName(), oc.getQuantity(), oc.getNamePromo(), oc.getTimeOrder(), oc.getDateOrder(), oc.getUsernameEmp()});
-                tblOrder.setModel(model);
+            if (cbIDOrder.getSelectedIndex() <= 0) {
+                IDOrder = "";
+            } else {
+                data = od.TimKiem_IDOrder(IDOrder);
+                DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+                model.setNumRows(0);
+                for (Order_Class oc : data) {
+                    model.addRow(new Object[]{oc.getIDOrder(), oc.getIDProduct(), oc.getCusName(), oc.getQuantity(), oc.getNamePromo(), oc.getTimeOrder(), oc.getDateOrder(), oc.getUsernameEmp()});
+                    tblOrder.setModel(model);
+                }
+            }
+            if (cbIDProduct.getSelectedIndex() <= 0) {
+                IDProduct = "";
+            } else {
+                data = od.TimKiem_IDProduct(IDProduct);
+                DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+                model.setNumRows(0);
+                for (Order_Class oc : data) {
+                    model.addRow(new Object[]{oc.getIDOrder(), oc.getIDProduct(), oc.getCusName(), oc.getQuantity(), oc.getNamePromo(), oc.getTimeOrder(), oc.getDateOrder(), oc.getUsernameEmp()});
+                    tblOrder.setModel(model);
+                }
+            }
+            if (cbIDCus.getSelectedIndex() <= 0) {
+                CusName = "";
+            } else {
+                data = od.TimKiem_CusName(CusName);
+                DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+                model.setNumRows(0);
+                for (Order_Class oc : data) {
+                    model.addRow(new Object[]{oc.getIDOrder(), oc.getIDProduct(), oc.getCusName(), oc.getQuantity(), oc.getNamePromo(), oc.getTimeOrder(), oc.getDateOrder(), oc.getUsernameEmp()});
+                    tblOrder.setModel(model);
+                }
+            }
+            if (cbPromotions.getSelectedIndex() <= 0) {
+                NamePromo = "";
+            } else {
+                data = od.TimKiem_NamePromo(NamePromo);
+                DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+                model.setNumRows(0);
+                for (Order_Class oc : data) {
+                    model.addRow(new Object[]{oc.getIDOrder(), oc.getIDProduct(), oc.getCusName(), oc.getQuantity(), oc.getNamePromo(), oc.getTimeOrder(), oc.getDateOrder(), oc.getUsernameEmp()});
+                    tblOrder.setModel(model);
+                }
+            }
+            if (cbNameEmp.getSelectedIndex() <= 0) {
+                UsernameEmp = "";
+            } else {
+                data = od.TimKiem_UsernameEmp(UsernameEmp);
+                DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+                model.setNumRows(0);
+                for (Order_Class oc : data) {
+                    model.addRow(new Object[]{oc.getIDOrder(), oc.getIDProduct(), oc.getCusName(), oc.getQuantity(), oc.getNamePromo(), oc.getTimeOrder(), oc.getDateOrder(), oc.getUsernameEmp()});
+                    tblOrder.setModel(model);
+                }
             }
         }
+
+//        if (DateOrder != "") {
+//            data = od.TimKiem_DateOrder(DateOrder);
+//            DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+//            model.setNumRows(0);
+//            for (Order_Class oc : data) {
+//                model.addRow(new Object[]{oc.getIDOrder(), oc.getIDProduct(), oc.getCusName(), oc.getQuantity(), oc.getNamePromo(), oc.getTimeOrder(), oc.getDateOrder(), oc.getUsernameEmp()});
+//                tblOrder.setModel(model);
+//            }
+//        }
 
     }//GEN-LAST:event_btnSearchActionPerformed
 
