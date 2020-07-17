@@ -95,6 +95,14 @@ public class Customer_Class {
         this.Quantity = Quantity;
         this.Discount = Discount;
     }
+
+    public Customer_Class(int IDCus, String CusName, String Date, int Quantity, int Discount) {
+        this.IDCus = IDCus;
+        this.CusName = CusName;
+        this.Date = Date;
+        this.Quantity = Quantity;
+        this.Discount = Discount;
+    }
     
                   
 }

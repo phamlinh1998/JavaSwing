@@ -21,10 +21,12 @@ import server.ConnectionDB;
  * @author Dell Vostro
  */
 public class ProductTypeDAO {
+
     Connection conn = ConnectionDB.getConnection();
+
     public List<ProductType_Class> getAll() {
         List<ProductType_Class> data = new ArrayList<>();
-        String sql="select * from ProductType";
+        String sql = "select * from ProductType";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
@@ -40,9 +42,10 @@ public class ProductTypeDAO {
         }
         return data;
     }
-     public List<ProductType_Class> getTypeName() {
+
+    public List<ProductType_Class> getTypeName() {
         List<ProductType_Class> data = new ArrayList<>();
-        String sql="select DISTINCT TypeName from ProductType";
+        String sql = "select DISTINCT TypeName from ProductType";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
@@ -56,6 +59,7 @@ public class ProductTypeDAO {
         }
         return data;
     }
+
     public void them(ProductType_Class pt) {
         String sql = "insert into ProductType values (?,?,?)";
         try {
@@ -68,27 +72,30 @@ public class ProductTypeDAO {
             Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void xoa(String ma) {
         String sql = "delete ProductType where IDType=?";
         try {
             CallableStatement stm = conn.prepareCall(sql);
-            stm.setString(1,ma);
+            stm.setString(1, ma);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public boolean xoasp(String ma) {
         String sql = "delete Product where IDType=?";
         try {
             CallableStatement stm = conn.prepareCall(sql);
-            stm.setString(1,ma);
+            stm.setString(1, ma);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }
+
     public void capnhat(ProductType_Class pt) {
         String sql = "update ProductType set TypeName=?,Size=? where IDType=?";
         try {
