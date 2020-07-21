@@ -74,7 +74,7 @@ public class LoginForm extends javax.swing.JFrame {
                     this.setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Lỗi:: Sai tên tài khoản hoặc mật khẩu Quản lý.");
-                    txtUser.grabFocus();
+                    
                 }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Lỗi:: Không thể kết nối đến SQL");

@@ -5,10 +5,7 @@
  */
 package view;
 
-import entities.Product_CLass;
-import entities.ProductType_Class;
-import entities.Promotion_Class;
-import entities.Customer_Class;
+import entities.*;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import static java.lang.Thread.sleep;
@@ -16,10 +13,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import DAO.banhangDAO;
+import DAO.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,12 +43,22 @@ public class BillForm extends javax.swing.JFrame {
      * Creates new form BillForm
      */
     SimpleDateFormat ft = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
     banhangDAO bhd;
+    OrderDAO od;
+    RevenueDAO rd;
+    CustomerDAO cd;
+    EmployeeDAO ed;
+    NumberFormat formatter = new DecimalFormat("#,###");
 
     public BillForm(String EmpName) {
         initComponents();
         clock();
         bhd = new banhangDAO();
+        od = new OrderDAO();
+        rd = new RevenueDAO();
+        cd = new CustomerDAO();
+        ed = new EmployeeDAO();
         spQuantity.setValue(1);
         txtEmpName.setText(EmpName);
         lbtt.setSize(30, 30);
@@ -52,7 +69,7 @@ public class BillForm extends javax.swing.JFrame {
         new setImage().setImageButton(btnAdd, "image//addtocart.png");
         btnDel.setSize(40, 40);
         new setImage().setImageButton(btnDel, "image//delete.png");
-        lbnen.setSize(343, 290);
+//        lbnen.setSize(304, 367);
         new setImage().setImagelable(lbnen, "image//anhnencafe1.jpg");
         spQuantity.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
         loadTenSP();
@@ -63,6 +80,7 @@ public class BillForm extends javax.swing.JFrame {
         panelTTKh.setVisible(false);
         Panelthanhtoan(false);
         txtGuest.setEnabled(false);
+        btnPrint.setEnabled(false);
     }
 
     public void Panelthanhtoan(boolean b) {
@@ -97,6 +115,40 @@ public class BillForm extends javax.swing.JFrame {
         clock.start();
     }
 
+    public void tongtien() {
+        int price, totalprice = 0;
+        int count = tblBill.getRowCount();
+        for (int i = 0; i < count; i++) {
+            price = Integer.parseInt(String.valueOf(tblBill.getValueAt(i, 6)));
+            totalprice += price;
+        }
+        txtTotal.setText(formatter.format(totalprice));
+    }
+
+    public void UpdatetxtDis1() {
+        int Dis;
+        if (cbCTKM.getSelectedIndex() > 0) {
+            int discount = bhd.getDis(String.valueOf(cbCTKM.getSelectedItem()));
+            txtDis1.setText(String.valueOf(discount));
+            String Order = txtTotal.getText().replaceAll(",", "");
+            Dis = (Integer.parseInt(txtDis1.getText()) * Integer.parseInt(Order)) / 100;
+            txtDis2.setText(formatter.format(Dis));
+            //tính total
+            int total = Integer.parseInt(Order) - Dis;
+            txtPay.setText(formatter.format(total));
+        } else {
+            txtDis1.setText("0");
+            //tính Discount
+            String Order = txtTotal.getText().replaceAll(",", "");
+            Dis = (Integer.parseInt(txtDis1.getText()) * Integer.parseInt(Order)) / 100;
+            txtDis2.setText(formatter.format(Dis));
+            //tính total
+            int total = Integer.parseInt(Order) - Dis;
+            txtPay.setText(formatter.format(total));
+        }
+
+    }
+
     public void loadBill() {
         DefaultTableModel model = (DefaultTableModel) tblBill.getModel();
         String ten = String.valueOf(cbProduct.getSelectedItem());
@@ -112,9 +164,12 @@ public class BillForm extends javax.swing.JFrame {
     }
 
     public void loadTenPromotion() {
-        java.util.List<Promotion_Class> data = bhd.getNamepromotion();
+        Date t = new Date();
+        String ngay = format.format(t);
+        java.util.List<Promotion_Class> data = bhd.getNamepromotion(ngay);
         DefaultComboBoxModel<String> models = new DefaultComboBoxModel<>();
         models.addElement("Không có");
+        models.addElement("Khách hàng vip");
         for (Promotion_Class item : data) {
             models.addElement(item.getNamePromo());
         }
@@ -200,6 +255,8 @@ public class BillForm extends javax.swing.JFrame {
         txtDis2 = new javax.swing.JTextField();
         btnPrint = new javax.swing.JButton();
         lbtt = new javax.swing.JLabel();
+        lbLoiGia = new javax.swing.JLabel();
+        lbloiMaHD = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBill = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
@@ -454,13 +511,28 @@ public class BillForm extends javax.swing.JFrame {
         txtGuest.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtGuest.setForeground(new java.awt.Color(0, 0, 255));
         txtGuest.setText("0");
+        txtGuest.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtGuestCaretUpdate(evt);
+            }
+        });
 
         txtRepay.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtRepay.setForeground(new java.awt.Color(255, 0, 0));
         txtRepay.setText("0");
+        txtRepay.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtRepayCaretUpdate(evt);
+            }
+        });
 
         txtIDBill.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtIDBill.setForeground(new java.awt.Color(0, 0, 255));
+        txtIDBill.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtIDBillCaretUpdate(evt);
+            }
+        });
 
         txtDis1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtDis1.setForeground(new java.awt.Color(0, 0, 255));
@@ -479,6 +551,15 @@ public class BillForm extends javax.swing.JFrame {
         btnPrint.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnPrint.setForeground(new java.awt.Color(0, 255, 51));
         btnPrint.setText("Lưu và In");
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
+
+        lbLoiGia.setForeground(new java.awt.Color(255, 0, 51));
+
+        lbloiMaHD.setForeground(new java.awt.Color(255, 0, 51));
 
         javax.swing.GroupLayout panelThanhToanLayout = new javax.swing.GroupLayout(panelThanhToan);
         panelThanhToan.setLayout(panelThanhToanLayout);
@@ -486,6 +567,11 @@ public class BillForm extends javax.swing.JFrame {
             panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelThanhToanLayout.createSequentialGroup()
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelThanhToanLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(lbtt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbTT, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelThanhToanLayout.createSequentialGroup()
                         .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lbTC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -495,24 +581,22 @@ public class BillForm extends javax.swing.JFrame {
                             .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(25, 25, 25)
-                        .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtRepay, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtGuest, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPay, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelThanhToanLayout.createSequentialGroup()
-                                .addComponent(txtDis1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbphantram, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDis2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
-                            .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIDBill)))
-                    .addGroup(panelThanhToanLayout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(lbtt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbTT, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbloiMaHD, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                            .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lbLoiGia, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                .addComponent(txtRepay)
+                                .addComponent(txtGuest)
+                                .addComponent(txtPay)
+                                .addGroup(panelThanhToanLayout.createSequentialGroup()
+                                    .addComponent(txtDis1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lbphantram, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtDis2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTotal)
+                                .addComponent(txtIDBill, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addGap(0, 30, Short.MAX_VALUE))
         );
         panelThanhToanLayout.setVerticalGroup(
@@ -529,13 +613,13 @@ public class BillForm extends javax.swing.JFrame {
                     .addComponent(lbTC, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbphantram, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbCK, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtDis1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtDis2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(txtDis2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbphantram, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 52, Short.MAX_VALUE)
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbthanhtien, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -543,7 +627,9 @@ public class BillForm extends javax.swing.JFrame {
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtGuest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbLoiGia)
+                .addGap(4, 4, 4)
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRepay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -551,7 +637,9 @@ public class BillForm extends javax.swing.JFrame {
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIDBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(2, 2, 2)
+                .addComponent(lbloiMaHD)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -614,21 +702,18 @@ public class BillForm extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbnen, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(spQuantity)
                             .addComponent(cbSize, 0, 106, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addContainerGap()
+                        .addComponent(lbnen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
                 .addComponent(panelThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -636,16 +721,14 @@ public class BillForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 4, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lbnen, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addContainerGap()
+                                .addComponent(lbnen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -672,7 +755,7 @@ public class BillForm extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Contact-icon.png"))); // NOI18N
@@ -709,10 +792,20 @@ public class BillForm extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Information.png"))); // NOI18N
         jMenu2.setText("Giới Thiệu\n");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Health_Insurance-512.png"))); // NOI18N
         jMenu4.setText("Chi Tiết Hóa Đơn");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -727,7 +820,7 @@ public class BillForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -735,7 +828,7 @@ public class BillForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miPassChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPassChangeActionPerformed
-        // TODO add your handling code here:
+        new PasswordChange(txtEmpName.getText()).setVisible(true);
     }//GEN-LAST:event_miPassChangeActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
@@ -757,17 +850,22 @@ public class BillForm extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
         loadBill();
+        tongtien();
+        UpdatetxtDis1();
         cbProduct.setSelectedIndex(0);
         spQuantity.setValue(1);
         cbSize.setSelectedIndex(0);
         btnPrint.setEnabled(false);
         txtIDBill.setEnabled(false);
-        txtPay.setEnabled(true);
+        txtPay.setEnabled(false);
         txtRepay.setEnabled(false);
+        txtGuest.setEnabled(true);
+        txtIDBill.setEnabled(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void cbCTKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCTKMActionPerformed
-        if (cbCTKM.getSelectedIndex() > 0) {
+        UpdatetxtDis1();
+        if (String.valueOf(cbCTKM.getSelectedItem()).equals("Khách hàng vip")) {
             lbmathe.setVisible(true);
             txtID.setVisible(true);
             panelTTKh.setVisible(true);
@@ -788,7 +886,7 @@ public class BillForm extends javax.swing.JFrame {
     }//GEN-LAST:event_miLogoutActionPerformed
 
     private void miInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miInformationActionPerformed
-        //new Information(txtEmpName.getText()).setVisible(true);
+        new Information(txtEmpName.getText()).setVisible(true);
     }//GEN-LAST:event_miInformationActionPerformed
 
     private void txtIDCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtIDCaretUpdate
@@ -812,21 +910,20 @@ public class BillForm extends javax.swing.JFrame {
 
             Customer_Class cl = new Customer_Class();
             cl = bhd.getThongTinKH(Integer.parseInt(txtID.getText()));
-
-            
-            
             lbIDCus.setText(String.valueOf(cl.getIDCus()));
             lbNameCus.setText(cl.getCusName());
             lbDateCus.setText(cl.getDate());
-            lbQuantityCus.setText(String.valueOf(cl.getQuantity()) + " Ly");
+            lbQuantityCus.setText(String.valueOf(cl.getQuantity()));
             lbDisCus.setText(String.valueOf(cl.getDiscount()) + " %");
             txtDis1.setText(String.valueOf(cl.getDiscount()));
 
             if (lbIDCus.getText().trim().equals("0")) {
                 lbIDError.setText("Mã thẻ không tồn tại!");
                 lbIDError.setForeground(Color.red);
-            }else{
+            } else {
                 lbIDError.setText("Thành công.");
+                txtRepay.setEnabled(false);
+                txtIDBill.setEnabled(false);
                 lbIDError.setForeground(Color.BLUE);
             }
         }
@@ -834,21 +931,269 @@ public class BillForm extends javax.swing.JFrame {
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         int line = tblBill.getSelectedRow();
-        DefaultTableModel tblModel = (DefaultTableModel) tblBill.getModel();;
-        tblModel.removeRow(line);
-        if (tblBill.getRowCount() > 0) {
-            txtGuest.setEnabled(true);
-        } else {
+        if (line > -1) {
+            DefaultTableModel tblModel = (DefaultTableModel) tblBill.getModel();;
+            tblModel.removeRow(line);
+            if (tblBill.getRowCount() > 0) {
+                txtGuest.setEnabled(true);
+            } else {
+                txtGuest.setEnabled(false);
+            }
+            txtPay.setText("0");
+            txtTotal.setText("0");
+            txtGuest.setText("0");
             txtGuest.setEnabled(false);
+            txtRepay.setText("0");
+            btnPrint.setEnabled(false);
+            txtIDBill.setEnabled(false);
+            txtIDBill.setText("");
+            txtDis2.setText("0");
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa chọn hàng cần xóa");
         }
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void txtRepayCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtRepayCaretUpdate
+
+    }//GEN-LAST:event_txtRepayCaretUpdate
+
+    private void txtGuestCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtGuestCaretUpdate
+        int repay;
+        while (true) {
+            if (txtGuest.getText().trim().equals("")) {
+                lbLoiGia.setText("Khách hàng chưa đưa tiền.");
+                txtRepay.setText("0");
+                txtIDBill.setEnabled(false);
+                return;
+            } else if (!txtGuest.getText().trim().matches("\\d+")) {
+                lbLoiGia.setText("Tiền có dạng số.");
+                txtRepay.setText("0");
+                txtIDBill.setEnabled(false);
+                return;
+            } else {
+                lbLoiGia.setText("");
+                txtIDBill.setEnabled(false);
+                break;
+            }
+        }
+        String total = txtPay.getText().replaceAll(",", "");
+        repay = Integer.parseInt(txtGuest.getText()) - Integer.parseInt(total);
+        txtRepay.setText(formatter.format(repay));
+        if (repay < 0) {
+            lbLoiGia.setText("Khách hàng chưa đưa đủ tiền.");
+            txtIDBill.setEnabled(false);
+            txtRepay.setText("0");
+        } else if (Integer.parseInt(txtGuest.getText()) == 0) {
+            txtIDBill.setEnabled(false);
+            txtRepay.setText("0");
+        } else {
+            lbLoiGia.setText("");
+            txtIDBill.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtGuestCaretUpdate
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        new AboutUs().setVisible(true);
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        new History().setVisible(true);
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+
+        luu();
+        updateCustomer();
+        updateRenevue();
+        inBill();
+    }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void txtIDBillCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtIDBillCaretUpdate
+        while (true) {
+            if (txtIDBill.getText().trim().equals("")) {
+                lbloiMaHD.setText("Mã hóa đơn không được để trống.");
+                return;
+            } else if (!txtIDBill.getText().trim().matches("HD[0-9]{4}")) {
+                lbloiMaHD.setText("Mã hóa đơn có dạng HDxxxx");
+                return;
+            } else if (!bhd.getIDOrder(txtIDBill.getText().trim())) {
+                lbloiMaHD.setText("Mã hóa đơn đã tồn tại.");
+                btnPrint.setEnabled(false);
+                return;
+            } else {
+                lbloiMaHD.setText("Thành công");
+                btnPrint.setEnabled(true);
+                break;
+            }
+
+        }
+
+    }//GEN-LAST:event_txtIDBillCaretUpdate
+
+    public void luu() {
+        if (cbCTKM.getSelectedItem().equals("Khách hàng VIP")) {
+            while (true) {
+                if (txtID.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Mã thẻ VIP không được để trống!");
+                    return;
+                } else if (!txtID.getText().trim().equals("") && !lbIDError.getText().equals("Thành công.")) {
+                    JOptionPane.showMessageDialog(null, "Mã thẻ VIP chưa đúng, vui lòng nhập lại!");
+                    return;
+                } else {
+                    break;
+                }
+            }
+        }
+        while (true) {
+
+            if (!bhd.getIDOrder(txtIDBill.getText().trim())) {
+                return;
+            } else {
+
+                int line = tblBill.getRowCount();
+                int quantity = 0;
+                Employee e = new Employee();
+                e = ed.getByName(txtEmpName.getText());
+                String ma = e.getUsernameEmp();
+                if (od.SaveOrder(txtIDBill.getText().trim(), ma)) {
+                    for (int i = 0; i < line; i++) {
+                        String IDProduct = (String) tblBill.getValueAt(i, 0);
+                        int ttquantity = Integer.parseInt(String.valueOf(tblBill.getValueAt(i, 5))) + quantity;
+                        String tenpro = String.valueOf(cbCTKM.getSelectedItem());
+                        if (tenpro.equals("Khách hàng VIP")) {
+                            od.SaveOrderDetails(txtIDBill.getText(), IDProduct, lbIDCus.getText(), ttquantity, tenpro);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "thêm đơn hàng thất bại");
+                }
+                break;
+            }
+        }
+
+    }
+
+    public void updateRenevue() {
+        String pay = txtPay.getText().replaceAll(",", "");
+        if (rd.getMoney1() == null) {
+            rd.addRevenue(pay);
+        } else {
+            Revenue_Class rc = new Revenue_Class();
+            rc = rd.getMoney1();
+            int money = Integer.parseInt(rc.getMoney());
+            int total = money + Integer.parseInt(pay);
+            rd.updateRevenue(String.valueOf(total));
+        }
+    }
+
+    public void updateCustomer() {
+        int line = tblBill.getRowCount();
+        int quantity = Integer.parseInt(lbQuantityCus.getText()), ttquantity = 0;
+
+        for (int i = 0; i < line; i++) {
+            ttquantity += Integer.parseInt(String.valueOf(tblBill.getValueAt(i, 5)));
+        }
+
+        int quannew = quantity + ttquantity;
+        if (quannew < 10) {
+            cd.updateQuanDis(quannew, 0, Integer.parseInt(lbIDCus.getText()));
+        } else if (quannew >= 10 && quannew < 20) {
+            cd.updateQuanDis(quannew, 5, Integer.parseInt(lbIDCus.getText()));
+        } else if (quannew >= 20 && quannew < 30) {
+            cd.updateQuanDis(quannew, 10, Integer.parseInt(lbIDCus.getText()));
+        } else if (quannew >= 30 && quannew < 40) {
+            cd.updateQuanDis(quannew, 15, Integer.parseInt(lbIDCus.getText()));
+        } else if (quannew >= 40 && quannew < 50) {
+            cd.updateQuanDis(quannew, 20, Integer.parseInt(lbIDCus.getText()));
+        } else if (quannew >= 50) {
+            cd.updateQuanDis(quannew, 25, Integer.parseInt(lbIDCus.getText()));
+        }
+    }
+
+    public void inBill() {
+        try {
+            int guest = Integer.parseInt(txtGuest.getText());
+            Date now = new Date();
+            File file = new File("LichSuBanHang.txt");
+            file.delete();
+            Writer bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("LichSuBanHang.txt"), "UTF8"));
+            bw.write("\t\t\tTHE GARDEN COFFEE\r\n\r\n");
+            bw.write("\t\tHà Nội\r\n");
+            bw.write("\t\t\tSĐT: 19008198\r\n\r\n");
+            bw.write("\t\t\tHÓA ĐƠN BÁN HÀNG\r\n\r\n");
+            bw.write("Mã hóa đơn: " + txtIDBill.getText() + "\r\n");
+            bw.write("Thời gian: " + ft.format(now) + "\r\n");
+            bw.write("NHÂN VIÊN: " + txtEmpName.getText() + "\r\n");
+            bw.write("------------------------------------------------------------\r\n");
+            bw.write("Mã\tTên\tKích thước\tSố lượng\tĐơn giá\tThành tiền\r\n");
+            bw.write("-----------------------------------------------------------\r\n");
+            //Ghi sản phẩm
+            int line = tblBill.getRowCount();
+            int quantotal = 0;
+            for (int i = 0; i < line; i++) {
+                String id = (String) tblBill.getValueAt(i, 0);
+                String name = (String) tblBill.getValueAt(i, 1);
+                String size = (String) tblBill.getValueAt(i, 4);
+                String price = String.valueOf(tblBill.getValueAt(i, 3));
+                String quantity = String.valueOf(tblBill.getValueAt(i, 5));
+                String intomoney = String.valueOf(tblBill.getValueAt(i, 6));
+                bw.write((i + 1) + ". " + name + "\r\n");
+                bw.write(id + "\t" + size + "\t\t" + quantity + "\t\t" + price + "\t" + intomoney + "\r\n\r\n");
+                quantotal += Integer.parseInt(quantity);
+            }
+            bw.write("------------------------------------------------------------\r\n");
+            bw.write("Tổng cộng:\t\t" + quantotal + "\t\t\t" + txtTotal.getText() + " VNĐ\r\n");
+            bw.write("\t\tChiết khấu:\t" + txtDis1.getText() + "%\t\t-" + txtDis2.getText() + " VNĐ\r\n");
+            bw.write("\t\t--------------------------------------------\r\n");
+            bw.write("\t\tThành tiền:\t\t\t" + txtPay.getText() + " VNĐ\r\n");
+            bw.write("\t\t--------------------------------------------\r\n");
+            bw.write("\t\tTiền khách đưa:\t\t\t" + formatter.format(guest) + " VNĐ\r\n");
+            bw.write("\t\tTiền trả lại:\t\t\t" + txtRepay.getText() + " VNĐ\r\n");
+            bw.write("------------------------------------------------------------\r\n");
+            bw.write("Chương trình khuyến mãi: ");
+            if (cbCTKM.getSelectedItem().equals("Không có")) {
+                bw.write("Không có.\r\n");
+            } else if (cbCTKM.getSelectedItem().equals("Khách hàng VIP")) {
+                bw.write("Thành viên quán.\r\n");
+                bw.write("-----Thông tin thành viên-----\r\n");
+                bw.write("Mã thẻ: " + lbIDCus.getText() + "\r\n");
+                bw.write("Tên thành viên: " + lbNameCus.getText() + "\r\n");
+                bw.write("Ngày đăng ký: " + lbDateCus.getText() + "\r\n");
+                bw.write("Số lượng cũ: " + lbQuantityCus.getText() + " ly.\r\n");
+                bw.write("Số ly mới mua: " + quantotal + " ly.\r\n");
+                bw.write("Chiết khấu (tính theo số lượng cũ): " + lbDisCus.getText() + "\r\n");
+            } else {
+                bw.write((String) cbCTKM.getSelectedItem() + "\r\n");
+            }
+            bw.write("------------------------------------------------------------\r\n");
+            bw.write("Mật khẩu Wifi: motdentam\r\n");
+            bw.write("---------------------CÁM ƠN QUÝ KHÁCH!----------------------");
+            bw.close();
+            Runtime run = Runtime.getRuntime();
+            try {
+                run.exec("notepad LichSuBanHang.txt");
+            } catch (IOException e) {
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(BillForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtIDBill.setEnabled(false);
+        txtIDBill.setText("");
+        cbCTKM.setSelectedIndex(0);
         txtPay.setText("0");
         txtTotal.setText("0");
         txtGuest.setText("0");
         txtGuest.setEnabled(false);
         txtRepay.setText("0");
+        ResetPnInfor();
+        txtID.setText("");
+        lbIDError.setText("");
+        lbloiMaHD.setText("");
         btnPrint.setEnabled(false);
-        txtIDBill.setEnabled(false);
-    }//GEN-LAST:event_btnDelActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tblBill.getModel();
+        model.setRowCount(0);
+    }
+
     private void ResetPnInfor() {
         lbIDCus.setText("................................");
         lbNameCus.setText("................................");
@@ -893,11 +1238,13 @@ public class BillForm extends javax.swing.JFrame {
     private javax.swing.JLabel lbDisCus;
     private javax.swing.JLabel lbIDCus;
     private javax.swing.JLabel lbIDError;
+    private javax.swing.JLabel lbLoiGia;
     private javax.swing.JLabel lbNameCus;
     private javax.swing.JLabel lbQuantityCus;
     private javax.swing.JLabel lbTC;
     private javax.swing.JLabel lbTT;
     private javax.swing.JLabel lbTime;
+    private javax.swing.JLabel lbloiMaHD;
     private javax.swing.JLabel lbmathe;
     private javax.swing.JLabel lbnen;
     private javax.swing.JLabel lbphantram;

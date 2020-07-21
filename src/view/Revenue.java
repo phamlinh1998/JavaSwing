@@ -35,6 +35,8 @@ public class Revenue extends javax.swing.JFrame {
     RevenueDAO rd;
     NumberFormat formatter = new DecimalFormat("#,###");
     SimpleDateFormat ft = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
     public Revenue() {
         initComponents();
         rd = new RevenueDAO();
@@ -89,10 +91,10 @@ public class Revenue extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lbTong = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtDate = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRevenue = new javax.swing.JTable();
         btnTimKiem = new javax.swing.JButton();
+        txtDate = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý doanh thu");
@@ -127,12 +129,6 @@ public class Revenue extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Tìm kiếm theo ngày:");
 
-        txtDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDateActionPerformed(evt);
-            }
-        });
-
         tblRevenue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -157,6 +153,10 @@ public class Revenue extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(22, 22, 22)
@@ -189,11 +189,6 @@ public class Revenue extends javax.swing.JFrame {
                     .addContainerGap(533, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(206, 206, 206)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(342, Short.MAX_VALUE)))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(446, 446, 446)
                     .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(138, Short.MAX_VALUE)))
@@ -201,7 +196,9 @@ public class Revenue extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 192, Short.MAX_VALUE)
+                .addGap(0, 146, Short.MAX_VALUE)
+                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -235,11 +232,6 @@ public class Revenue extends javax.swing.JFrame {
                     .addContainerGap(249, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(145, 145, 145)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(248, Short.MAX_VALUE)))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(144, 144, 144)
                     .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(246, Short.MAX_VALUE)))
@@ -260,21 +252,17 @@ public class Revenue extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDateActionPerformed
-
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         tblRevenue.removeAll();
-        txtDate.setText("");
+        txtDate.setCalendar(null);
         btnPrint.setEnabled(true);
         loadTT();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         while (true) {
-            if (!txtDate.getText().trim().matches("([0-9]{0,2}/)?([0-9]{0,2}/)?[0-9]{4}")) {
-                JOptionPane.showMessageDialog(null, "Nhập đúng định dạng để tìm kiếm: dd/MM/yyyy");
+            if (txtDate.getCalendar() == null) {
+                JOptionPane.showMessageDialog(null, "Bạn chưa nhập ngày để tìm kiếm");
                 btnPrint.setEnabled(false);
                 return;
             } else {
@@ -283,7 +271,7 @@ public class Revenue extends javax.swing.JFrame {
         }
         DefaultTableModel model1 = (DefaultTableModel) tblRevenue.getModel();
         model1.setNumRows(0);
-        for (Revenue_Class rc : rd.getByDate((String) txtDate.getText())) {
+        for (Revenue_Class rc : rd.getByDate(format.format(txtDate.getDate()))) {
             model1.addRow(new Object[]{rc.getMa(), rc.getDate(), rc.getMoney()});
             tblRevenue.setModel(model1);
         }
@@ -310,10 +298,9 @@ public class Revenue extends javax.swing.JFrame {
             b.write("Địa chỉ: Hà Nội\r\n");
             b.write("SĐT: 113\r\n");
             b.write("Thời gian: " + ft.format(now) + "\r\n\r\n");
-            if (txtDate.getText().trim().matches("[0-9]{0,2}/[0-9]{0,2}/[0-9]{4}")) {
-                a = "ngày " + txtDate.getText().trim();
-                b.write("\tBẢNG THỐNG KÊ DOANH THU (theo " + a + ")\r\n\r\n");
-            } 
+
+            a = "ngày " + format.format(txtDate.getDate());
+            b.write("\tBẢNG THỐNG KÊ DOANH THU (theo " + a + ")\r\n\r\n");
             b.write("\t---------------------------------\r\n");
             b.write("\tID\tNgày thu\tSố tiền\r\n");
             b.write("\t---------------------------------\r\n");
@@ -386,6 +373,6 @@ public class Revenue extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbTong;
     private javax.swing.JTable tblRevenue;
-    private javax.swing.JTextField txtDate;
+    private com.toedter.calendar.JDateChooser txtDate;
     // End of variables declaration//GEN-END:variables
 }

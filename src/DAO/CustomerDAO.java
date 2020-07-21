@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package DAO;
+
 import entities.*;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -15,12 +17,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.ConnectionDB;
+
 /**
  *
  * @author Dell Vostro
  */
 public class CustomerDAO {
-        Connection conn = ConnectionDB.getConnection();
+
+    Connection conn = ConnectionDB.getConnection();
 
     public List<Customer_Class> getAll() {
         List<Customer_Class> data = new ArrayList<>();
@@ -67,7 +71,8 @@ public class CustomerDAO {
 //        }
 //        return data;
 //    }
-    public void them(String IdentityCard,String CusName,String date,String phone,String Email,int Quantity,int Discount  ) {
+
+    public void them(String IdentityCard, String CusName, String date, String phone, String Email, int Quantity, int Discount) {
         String sql = "insert into Customer values (?,?,?,?,?,?,?)";//convert sang dinh dang dd/mm/yyyy
         try {
             CallableStatement stm = conn.prepareCall(sql);
@@ -83,10 +88,11 @@ public class CustomerDAO {
             Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void capnhat(String Phone,String Email,String IDCus) {
+
+    public void capnhat(String Phone, String Email, String IDCus) {
         String sql = "update Customer set Phone=?,Email=? where IDCus=?";
         try {
-            CallableStatement stm = conn.prepareCall(sql);
+            PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, Phone);
             stm.setString(2, Email);
             stm.setString(3, IDCus);
@@ -95,10 +101,24 @@ public class CustomerDAO {
             Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void updateQuanDis(int Quantity, int Discount, int IDCus) {
+        String sql = "update Customer set Quantity=?,Discount=? where IDCus=?";
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, Quantity);
+            stm.setInt(2, Discount);
+            stm.setInt(3, IDCus);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void xoa(String ma) {
         String sql = "delete Customer where IDCus=?";
         try {
-            CallableStatement stm = conn.prepareCall(sql);
+            PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, ma);
             stm.executeUpdate();
         } catch (SQLException ex) {

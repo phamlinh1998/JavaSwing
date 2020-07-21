@@ -23,7 +23,7 @@ public class OrderDAO {
 
     public List<Order_Class> getAll() {
         List<Order_Class> data = new ArrayList<>();
-        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp "
+        String sql = "select Orders.IDOrder,IDProduct,IDCus,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp "
                 + "from OrderDetails join Orders on OrderDetails.IDOrder=Orders.IDOrder Order by OrderDetails.IDOrder DESC";
         try {
             CallableStatement stm = conn.prepareCall(sql);
@@ -32,7 +32,7 @@ public class OrderDAO {
                 Order_Class oc = new Order_Class();
                 oc.setIDOrder(rs.getString("IDOrder"));
                 oc.setIDProduct(rs.getString("IDProduct"));
-                oc.setCusName(rs.getString("CusName"));
+                oc.setCusName(rs.getString("IDCus"));
                 oc.setQuantity(rs.getInt("Quantity"));
                 oc.setNamePromo(rs.getString("NamePromo"));
                 oc.setTimeOrder(rs.getString("TimeOrder"));
@@ -59,9 +59,9 @@ public class OrderDAO {
             } else if (NamePromo != "") {
                 sql = sql + " OrderDetails.NamePromo LIKE NamePromo";
             } else if (DateOrder != "") {
-                sql =sql + " Orders.DateOrder LIKE DateOrder";
+                sql = sql + " Orders.DateOrder LIKE DateOrder";
             } else if (UsernameEmp != "") {
-                sql =sql + " Orders.UsernameEmp LIKE UsernameEmp ";
+                sql = sql + " Orders.UsernameEmp LIKE UsernameEmp ";
             }
             PreparedStatement stm = conn.prepareStatement(sql);
 //            stm.setString(1, IDOrder);
@@ -90,7 +90,7 @@ public class OrderDAO {
     }
 
     public List<Order_Class> TimKiem_IDOrder(String IDOrder) {
-        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+        String sql = "select Orders.IDOrder,IDProduct,IDCus,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
                 + "Where OrderDetails.IDOrder LIKE ?";
         List<Order_Class> data = new ArrayList<>();
         try {
@@ -101,7 +101,7 @@ public class OrderDAO {
                 Order_Class oc = new Order_Class();
                 oc.setIDOrder(rs.getString("IDOrder"));
                 oc.setIDProduct(rs.getString("IDProduct"));
-                oc.setCusName(rs.getString("CusName"));
+                oc.setCusName(rs.getString("IDCus"));
                 oc.setQuantity(rs.getInt("Quantity"));
                 oc.setNamePromo(rs.getString("NamePromo"));
                 oc.setTimeOrder(rs.getString("TimeOrder"));
@@ -116,7 +116,7 @@ public class OrderDAO {
     }
 
     public List<Order_Class> TimKiem_IDProduct(String IDProduct) {
-        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+        String sql = "select Orders.IDOrder,IDProduct,IDCus,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
                 + "Where OrderDetails.IDProduct LIKE ?";
         List<Order_Class> data = new ArrayList<>();
         try {
@@ -127,7 +127,7 @@ public class OrderDAO {
                 Order_Class oc = new Order_Class();
                 oc.setIDOrder(rs.getString("IDOrder"));
                 oc.setIDProduct(rs.getString("IDProduct"));
-                oc.setCusName(rs.getString("CusName"));
+                oc.setCusName(rs.getString("IDCus"));
                 oc.setQuantity(rs.getInt("Quantity"));
                 oc.setNamePromo(rs.getString("NamePromo"));
                 oc.setTimeOrder(rs.getString("TimeOrder"));
@@ -142,7 +142,7 @@ public class OrderDAO {
     }
 
     public List<Order_Class> TimKiem_NamePromo(String NamePromo) {
-        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+        String sql = "select Orders.IDOrder,IDProduct,IDCus,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
                 + "Where OrderDetails.NamePromo LIKE ? Order By Orders.IDOrder DESC";
         List<Order_Class> data = new ArrayList<>();
         try {
@@ -153,7 +153,7 @@ public class OrderDAO {
                 Order_Class oc = new Order_Class();
                 oc.setIDOrder(rs.getString("IDOrder"));
                 oc.setIDProduct(rs.getString("IDProduct"));
-                oc.setCusName(rs.getString("CusName"));
+                oc.setCusName(rs.getString("IDCus"));
                 oc.setQuantity(rs.getInt("Quantity"));
                 oc.setNamePromo(rs.getString("NamePromo"));
                 oc.setTimeOrder(rs.getString("TimeOrder"));
@@ -168,7 +168,7 @@ public class OrderDAO {
     }
 
     public List<Order_Class> TimKiem_DateOrder(String DateOrder) {
-        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+        String sql = "select Orders.IDOrder,IDProduct,IDCus,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
                 + "Where Orders.DateOrder LIKE ?";
         List<Order_Class> data = new ArrayList<>();
         try {
@@ -179,7 +179,7 @@ public class OrderDAO {
                 Order_Class oc = new Order_Class();
                 oc.setIDOrder(rs.getString("IDOrder"));
                 oc.setIDProduct(rs.getString("IDProduct"));
-                oc.setCusName(rs.getString("CusName"));
+                oc.setCusName(rs.getString("IDCus"));
                 oc.setQuantity(rs.getInt("Quantity"));
                 oc.setNamePromo(rs.getString("NamePromo"));
                 oc.setTimeOrder(rs.getString("TimeOrder"));
@@ -194,7 +194,7 @@ public class OrderDAO {
     }
 
     public List<Order_Class> TimKiem_UsernameEmp(String UsernameEmp) {
-        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+        String sql = "select Orders.IDOrder,IDProduct,IDCus,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
                 + "Where [Orders].UsernameEmp LIKE ? Order By Orders.IDOrder DESC";
         List<Order_Class> data = new ArrayList<>();
         try {
@@ -205,7 +205,7 @@ public class OrderDAO {
                 Order_Class oc = new Order_Class();
                 oc.setIDOrder(rs.getString("IDOrder"));
                 oc.setIDProduct(rs.getString("IDProduct"));
-                oc.setCusName(rs.getString("CusName"));
+                oc.setCusName(rs.getString("IDCus"));
                 oc.setQuantity(rs.getInt("Quantity"));
                 oc.setNamePromo(rs.getString("NamePromo"));
                 oc.setTimeOrder(rs.getString("TimeOrder"));
@@ -220,7 +220,7 @@ public class OrderDAO {
     }
 
     public List<Order_Class> TimKiem_CusName(String CusName) {
-        String sql = "select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
+        String sql = "select Orders.IDOrder,IDProduct,IDCus,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder "
                 + "Where OrderDetails.CusName LIKE ?";
         List<Order_Class> data = new ArrayList<>();
         try {
@@ -231,7 +231,7 @@ public class OrderDAO {
                 Order_Class oc = new Order_Class();
                 oc.setIDOrder(rs.getString("IDOrder"));
                 oc.setIDProduct(rs.getString("IDProduct"));
-                oc.setCusName(rs.getString("CusName"));
+                oc.setCusName(rs.getString("IDCus"));
                 oc.setQuantity(rs.getInt("Quantity"));
                 oc.setNamePromo(rs.getString("NamePromo"));
                 oc.setTimeOrder(rs.getString("TimeOrder"));
@@ -281,13 +281,13 @@ public class OrderDAO {
 
     public List<Order_Class> getByCusName() {
         List<Order_Class> data = new ArrayList<>();
-        String sql = "select distinct CusName from OrderDetails";
+        String sql = "select distinct IDCus from OrderDetails";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Order_Class oc = new Order_Class();
-                oc.setCusName(rs.getString("CusName"));
+                oc.setCusName(rs.getString("IDCus"));
                 data.add(oc);
             }
         } catch (SQLException ex) {
@@ -345,5 +345,35 @@ public class OrderDAO {
             Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
+    }
+
+    public boolean SaveOrder(String id, String tenNV) {
+        String sql = "Insert into Orders values(?,convert(varchar(20),getdate(),103),convert(varchar(20),getdate(),108),?)";
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, id);
+            stm.setString(2, tenNV);
+            stm.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(banhangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public void SaveOrderDetails(String IDOrder, String IDProduct, String CusName, int Quantity,String NamePromo) {
+        String sql = "Insert into OrderDetails values(?,?,?,?,?)";
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, IDOrder);
+            stm.setString(2, IDProduct);
+            stm.setString(3, CusName);
+            stm.setInt(4, Quantity);
+            stm.setString(5, NamePromo);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(banhangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

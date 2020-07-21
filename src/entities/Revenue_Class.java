@@ -40,5 +40,10 @@ public class Revenue_Class {
     public void setMoney(String Money) {
         this.Money = Money;
     }
+
+    public Revenue_Class(String Date, String Money) {
+        this.Date = Date;
+        this.Money = Money;
+    }
     
 }

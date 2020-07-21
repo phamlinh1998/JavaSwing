@@ -8,6 +8,7 @@ package DAO;
 import entities.*;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -107,5 +108,24 @@ public class ProductTypeDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public ProductType_Class getId(String ten, String kichthuoc) {
+        String sql = "select IDType from ProductType where TypeName=? and Size=?";
+        
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, ten);
+            stm.setString(2, kichthuoc);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                ProductType_Class ptc = new ProductType_Class();
+                ptc.setIDType(rs.getString("IDType"));  
+                return ptc;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

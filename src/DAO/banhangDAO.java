@@ -5,10 +5,8 @@
  */
 package DAO;
 
-import entities.Customer_Class;
-import entities.Product_CLass;
-import entities.ProductType_Class;
-import entities.Promotion_Class;
+import entities.*;
+import entities.Employee;
 import server.ConnectionDB;
 import java.sql.*;
 import java.util.ArrayList;
@@ -47,11 +45,13 @@ public class banhangDAO {
         return data;
     }
 
-    public List<Promotion_Class> getNamepromotion() {
+    public List<Promotion_Class> getNamepromotion(String date) {
         List<Promotion_Class> data = new ArrayList<>();
-        String sql = "select DISTINCT NamePromo from Promotions";
+        String sql = "select DISTINCT NamePromo from Promotions where CONVERT(varchar, StartPromo, 101)<CONVERT(varchar, ?, 101) and CONVERT(varchar, ?, 101) < CONVERT(varchar, EndPromo, 101)";
         try {
-            CallableStatement stm = conn.prepareCall(sql);
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, date);
+            stm.setString(2, date);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Promotion_Class pc = new Promotion_Class();
@@ -119,5 +119,58 @@ public class banhangDAO {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return c;
+    }
+
+    public int getDis(String  name) {
+        Promotion_Class pc = new Promotion_Class();
+        String sql = "Select DiscountPromo from Promotions where NamePromo=?";
+        int discount;
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, name);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                discount = rs.getInt("DiscountPromo");
+                return discount;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public Employee getEmployeee(String EmpName) {
+        String sql = "select * from Employee where NameEmp=?";
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, EmpName);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Employee e = new Employee();
+                e.setNameEmp(rs.getString("NameEmp"));               
+                e.setGender(rs.getString("Gender"));
+                e.setBirthday(rs.getString("Birthday"));
+                e.setPhone(rs.getString("Phone"));
+                e.setEmail(rs.getString("Email"));
+                e.setAddress(rs.getString("Address"));
+                return e;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public boolean getIDOrder(String id){
+        String sql = "select IDOrder from Orders where IDOrder=? ";
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {                
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(banhangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 }

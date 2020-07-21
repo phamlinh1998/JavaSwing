@@ -68,7 +68,7 @@ public class Product extends javax.swing.JFrame {
         btnTimKiem.setVisible(false);
         txtTKTen.setVisible(false);
         PanelTimKiem.setVisible(false);
-        loadcbSP();
+
     }
 
     public void loadSP() {
@@ -167,11 +167,17 @@ public class Product extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSP = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(792, 699));
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 0, 0));
@@ -363,6 +369,8 @@ public class Product extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Loại Sản Phẩm", jPanel2);
 
+        jPanel1.setForeground(new java.awt.Color(255, 0, 0));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -524,6 +532,11 @@ public class Product extends javax.swing.JFrame {
         btnResetSP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnResetSP.setForeground(new java.awt.Color(153, 0, 153));
         btnResetSP.setText("Làm Mới");
+        btnResetSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetSPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -574,6 +587,10 @@ public class Product extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("VNĐ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -598,6 +615,8 @@ public class Product extends javax.swing.JFrame {
                                     .addComponent(cbNameType, 0, 173, Short.MAX_VALUE)
                                     .addComponent(cbKichCo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnTimKiem)
@@ -636,9 +655,10 @@ public class Product extends javax.swing.JFrame {
                             .addComponent(cbNameType, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPrice)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -727,6 +747,9 @@ public class Product extends javax.swing.JFrame {
                     if (txtNameproduct.getText().trim().equals("")) {
                         JOptionPane.showMessageDialog(null, "Tên không được để trống");
                         return;
+                    } else if (!txtNameproduct.getText().trim().matches("[A-Za-z0-9^\\p{L}\\s]")) {
+                        JOptionPane.showMessageDialog(null, "Tên sản phẩm không chứa các ký tự số và đặc biệt");
+                        return;
                     } else {
                         break;
                     }
@@ -749,29 +772,30 @@ public class Product extends javax.swing.JFrame {
                 stmLSP.setString(1, (String) cbNameType.getSelectedItem());
                 stmLSP.setString(2, (String) cbKichCo.getSelectedItem());
                 rsLSP = stmLSP.executeQuery();
-//                String S=pd.getIdType(String.valueOf(cbNameType.getSelectedItem()),String.valueOf(cbKichCo.getSelectedItem()));
-//                Product_CLass pc = new Product_CLass(txtIDProduct.getText(), txtNameproduct.getText(),S, Integer.parseInt(txtPrice.getText()));
-////                Product_CLass pc = new Product_CLass();
-////                pc.setIDProduct(txtIDProduct.getText());
-////                pc.setProductName(txtNameproduct.getText());
-////                pc.setIDType(pd.getIdType());
-//                pd.them(pc);
-                String sql = "insert into Product values(?,?,?,?)";
-                stmSP = conn.prepareStatement(sql);
-                stmSP.setString(1, txtIDProduct.getText());
-                stmSP.setString(2, txtNameproduct.getText());
-                stmSP.setString(3, rsLSP.getString("IDType"));//cbBox
-                stmSP.setInt(4, Integer.parseInt(txtPrice.getText()));//kieu int
-                stmSP.executeUpdate();
-                loadSP();
-                JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công");
-                txtIDProduct.setText("");
-                txtNameproduct.setText("");
-                cbNameType.setSelectedIndex(0);
-                txtPrice.setText("");
-                cbKichCo.setSelectedIndex(0);
+                if (rsLSP.next()) {
+                    Product_CLass pc = new Product_CLass(txtIDProduct.getText(), txtNameproduct.getText(), rsLSP.getString("IDType"), Integer.parseInt(txtPrice.getText()));
+                    pd.them(pc);
+//                    String sql = "insert into Product values(?,?,?,?)";
+//                    stmSP = conn.prepareStatement(sql);
+//                    stmSP.setString(1, txtIDProduct.getText());
+//                    stmSP.setString(2, txtNameproduct.getText());
+//                    stmSP.setString(3, String.valueOf(cbNameType.getSelectedItem()));//cbBox
+//                    stmSP.setInt(4, Integer.parseInt(txtPrice.getText()));//kieu int
+//                    stmSP.executeUpdate();
+                    loadSP();
+                    JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công");
+                    txtIDProduct.setText("");
+                    txtNameproduct.setText("");
+                    cbNameType.setSelectedIndex(0);
+                    txtPrice.setText("");
+                    cbKichCo.setSelectedIndex(0);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Loại sản phẩm hoặc kích thước không đúng");
+                }
             } catch (Exception e) {
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "thêm sản phẩm thất bại");
         }
     }//GEN-LAST:event_btnAddSPActionPerformed
 
@@ -809,13 +833,16 @@ public class Product extends javax.swing.JFrame {
                         for (int i = 0; i < line; i++) {
                             if (txtNameType.getText().equals(tblLoaiSP.getValueAt(i, 1))
                                     && (cbSizeType.getSelectedItem().equals(tblLoaiSP.getValueAt(i, 2)))) {
-                                JOptionPane.showMessageDialog(this, "Loại sản phẩm đã tồn tại");
+                                JOptionPane.showMessageDialog(null, "Loại sản phẩm đã tồn tại");
                                 return;
                             }
                         }
 
                         if (txtNameType.getText().trim().equals("")) {
-                            JOptionPane.showMessageDialog(this, "Tên không được để trống");
+                            JOptionPane.showMessageDialog(null, "Tên không được để trống");
+                            return;
+                        } else if (!txtNameType.getText().trim().matches(".*[A-Za-z]")) {
+                            JOptionPane.showMessageDialog(null, "Loại sản phẩm không chứa các ký tự số và đặc biệt");
                             return;
                         } else {
                             break;
@@ -866,6 +893,33 @@ public class Product extends javax.swing.JFrame {
     private void btnSuaLoaiSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaLoaiSPActionPerformed
         int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa loại sản phẩm không?");
         if (click == 0) {
+            while (true) {
+                int line = tblLoaiSP.getRowCount();
+                try {
+                    String sql2 = "select * from ProductType";
+                    stmLSP = conn.prepareStatement(sql2);
+                    rsLSP = stmLSP.executeQuery();
+                    for (int i = 0; i < line; i++) {
+                        if (txtNameType.getText().equals(tblLoaiSP.getValueAt(i, 1))
+                                && (cbSizeType.getSelectedItem().equals(tblLoaiSP.getValueAt(i, 2)))) {
+                            JOptionPane.showMessageDialog(null, "Loại sản phẩm đã tồn tại");
+                            return;
+                        }
+                    }
+
+                    if (txtNameType.getText().trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Tên không được để trống");
+                        return;
+                    } else if (!txtNameType.getText().trim().matches(".*[A-Za-z]")) {
+                        JOptionPane.showMessageDialog(null, "Loại sản phẩm không chứa các ký tự số và đặc biệt");
+                        return;
+                    } else {
+                        break;
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             ProductType_Class ptc = new ProductType_Class(txtIDProductType.getText(), txtNameType.getText(), String.valueOf(cbSizeType.getSelectedItem()));
             ptd.capnhat(ptc);
             loadLSP();
@@ -876,6 +930,10 @@ public class Product extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Sửa loại sản phẩm không thành công");
         }
+        txtIDProductType.setEnabled(true);
+        btnThemLoaiSP.setEnabled(true);
+        btnSuaLoaiSP.setEnabled(false);
+        btnXoaLoaiSP.setEnabled(false);
     }//GEN-LAST:event_btnSuaLoaiSPActionPerformed
 
     private void tblLoaiSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLoaiSPMouseClicked
@@ -908,6 +966,10 @@ public class Product extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
+        txtIDProductType.setEnabled(true);
+        btnXoaLoaiSP.setEnabled(false);
+        btnSuaLoaiSP.setEnabled(false);
+        btnThemLoaiSP.setEnabled(true);
     }//GEN-LAST:event_btnXoaLoaiSPActionPerformed
 
     private void btnDeleteSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteSPActionPerformed
@@ -964,29 +1026,46 @@ public class Product extends javax.swing.JFrame {
     private void btnUpdateSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSPActionPerformed
         int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa sản phẩm không?");
         if (click == 0) {
+            ProductType_Class ptc = new ProductType_Class();
 
-            try {
-                String sql2 = "select * from ProductType where TypeName=? and Size=?";
-                PreparedStatement psLoaiSP = conn.prepareStatement(sql2);
-                psLoaiSP.setString(1, (String) cbNameType.getSelectedItem());
-                psLoaiSP.setString(2, (String) cbKichCo.getSelectedItem());
-                ResultSet rsLoaiSP = psLoaiSP.executeQuery();
-                if (rsLoaiSP.next()) {
-                    String sql = "update Product set ProductName=?, IDType=?, Price=? where IDProduct=?";
-                    PreparedStatement psSP = conn.prepareStatement(sql);
-                    psSP.setString(1, txtNameproduct.getText());
-                    psSP.setString(2, rsLoaiSP.getString(1));//cbBox
-                    psSP.setInt(3, Integer.parseInt(txtPrice.getText()));//kieu int
-                    psSP.setString(4, txtIDProduct.getText());
-                    psSP.executeUpdate();
-                    loadSP();
-                    JOptionPane.showMessageDialog(null, "Sửa sản phẩm thành công");
+            while (true) {
+                ptc = ptd.getId((String) cbNameType.getSelectedItem(), (String) cbKichCo.getSelectedItem());
+                if (ptc == null) {
+                    JOptionPane.showMessageDialog(null, "Sản phẩm không tồn tại");
+                    return;
                 } else {
-                    JOptionPane.showMessageDialog(null, "Không tìm thấy nhóm sản phẩm.");
+                    int line = tblSP.getRowCount();
+                    for (int i = 0; i < line; i++) {
+                        if (txtNameproduct.getText().equals(tblSP.getValueAt(i, 1)) && ptc.getIDType().equals(String.valueOf(tblSP.getValueAt(i, 2)))
+                                && (cbKichCo.getSelectedItem().equals(tblSP.getValueAt(i, 4)))) {
+                            JOptionPane.showMessageDialog(null, "Sản phẩm đã tồn tại");
+                            return;
+                        }
+                    }
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+                if (txtNameproduct.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Tên sản phẩm không được để trống");
+                    return;
+                } else if (!txtNameproduct.getText().trim().matches(".*[A-Za-z]")) {
+                    JOptionPane.showMessageDialog(null, "Tên sản phẩm không chứa các ký tự số và đặc biệt");
+                    return;
+                } else if (txtPrice.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Giá không được để trống");
+                    return;
+                } else if (!txtPrice.getText().trim().matches("[0-9]+")) {
+                    JOptionPane.showMessageDialog(null, "Giá phải là số và lớn hơn 0");
+                    return;
+                } else if ((Integer.parseInt(txtPrice.getText())) <= 0 || Integer.parseInt(txtPrice.getText()) > 200000) {
+                    JOptionPane.showMessageDialog(null, "Giá phải lớn hơn 0 và nhỏ hơn 200.000");
+                    return;
+                } else {
+                    break;
+                }
             }
+            pd.capnhat(txtNameproduct.getText(), ptc.getIDType(), Integer.parseInt(txtPrice.getText()), txtIDProduct.getText());
+            loadSP();
+            JOptionPane.showMessageDialog(null, "Sửa sản phẩm thành công");
+
         }
     }//GEN-LAST:event_btnUpdateSPActionPerformed
 
@@ -1070,65 +1149,103 @@ public class Product extends javax.swing.JFrame {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         if (cbChonTimKiem.getSelectedItem().equals("Tên")) {
-            if (pd.getByProductName(txtTKTen.getText()) == null) {
-                JOptionPane.showMessageDialog(null, "Không tìm thấy tên sản phẩm theo yêu cầu");
-            } else {
-                {
-                    DefaultTableModel model1 = (DefaultTableModel) tblSP.getModel();
-                    model1.setNumRows(0);
-                    for (Product_CLass p : pd.getByProductName(txtTKTen.getText())) {
-                        model1.addRow(new Object[]{p.getIDProduct(), p.getProductName(), p.getIDType(), p.getPrice(), p.getSize()});
-                        tblSP.setModel(model1);
-                    }
-
+            while (true) {
+                if (txtTKTen.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Tên sản phẩm không được để trống");
+                    return;
+                } else if (!txtTKTen.getText().trim().matches(".*[A-Za-z^\\p{L}\\s]")) {
+                    JOptionPane.showMessageDialog(null, "Tên sản phẩm không chứa các ký tự số và đặc biệt");
+                    return;
+                }
+                DefaultTableModel model1 = (DefaultTableModel) tblSP.getModel();
+                model1.setNumRows(0);
+                for (Product_CLass p : pd.getByProductName(txtTKTen.getText())) {
+                    model1.addRow(new Object[]{p.getIDProduct(), p.getProductName(), p.getIDType(), p.getPrice(), p.getSize()});
+                    tblSP.setModel(model1);
+                }
+                int line = model1.getRowCount();
+                if (line < 1) {
+                    JOptionPane.showMessageDialog(null, "Không có sản phầm nào");
+                    return;
+                } else {
+                    break;
                 }
             }
+
         } else if (cbChonTimKiem.getSelectedItem().equals("Giá")) {
+            txtDen.setEnabled(true);
             while (true) {
                 if (txtGiaTu.getText().trim().equals("")) {
                     JOptionPane.showMessageDialog(null, "Giá không được để trống");
                     return;
-                } else if (!txtPrice.getText().trim().matches("[0-9]+")) {
+                } else if (!txtGiaTu.getText().trim().matches("[0-9]+")) {
                     JOptionPane.showMessageDialog(null, "Giá phải là số và lớn hơn 0");
                     return;
-                } 
+                }
                 if (txtDen.getText().trim().equals("")) {
                     JOptionPane.showMessageDialog(null, "Giá không được để trống");
                     return;
-                } else if (!txtPrice.getText().trim().matches("[0-9]+")) {
+                } else if (!txtDen.getText().trim().matches("[0-9]+")) {
                     JOptionPane.showMessageDialog(null, "Giá phải là số và lớn hơn 0");
                     return;
-                } else if(Integer.parseInt(txtDen.getText())<Integer.parseInt(txtGiaTu.getText())){
-                    JOptionPane.showMessageDialog(null, "Giá đến phải lớn hơn giá từ");
-                }else {
-                    break;
+                } else if (Integer.parseInt(txtDen.getText()) < Integer.parseInt(txtGiaTu.getText())) {
+                    JOptionPane.showMessageDialog(null, "Giá sau phải lớn hơn giá trước");
+                    return;
                 }
-            }
-            if (pd.getByPrice(Integer.parseInt(txtGiaTu.getText()), Integer.parseInt(txtDen.getText())) == null) {
-                JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm theo yêu cầu");
-            } else {
-                {
-                    DefaultTableModel model1 = (DefaultTableModel) tblSP.getModel();
-                    model1.setNumRows(0);
-                    for (Product_CLass p : pd.getByPrice(Integer.parseInt(txtGiaTu.getText()), Integer.parseInt(txtDen.getText()))) {
-                        model1.addRow(new Object[]{p.getIDProduct(), p.getProductName(), p.getIDType(), p.getPrice(), p.getSize()});
-                        tblSP.setModel(model1);
-                    }
-                }
-            }
-        } else if (cbChonTimKiem.getSelectedItem().equals("Nhóm")) {
-            if (pd.getByGroup(String.valueOf(cbLoaiTK.getSelectedItem()), String.valueOf(cbKichThuoc.getSelectedItem())) == null) {
-                JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm theo yêu cầu");
-            } else {
                 DefaultTableModel model1 = (DefaultTableModel) tblSP.getModel();
                 model1.setNumRows(0);
-                for (Product_CLass p : pd.getByGroup(String.valueOf(cbLoaiTK.getSelectedItem()), String.valueOf(cbKichThuoc.getSelectedItem()))) {
+                for (Product_CLass p : pd.getByPrice(Integer.parseInt(txtGiaTu.getText()), Integer.parseInt(txtDen.getText()))) {
                     model1.addRow(new Object[]{p.getIDProduct(), p.getProductName(), p.getIDType(), p.getPrice(), p.getSize()});
                     tblSP.setModel(model1);
                 }
+                int line = model1.getRowCount();
+                if (line < 1) {
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm theo yêu cầu");
+                    return;
+                } else {
+                    break;
+                }
+            }
+        } else if (cbChonTimKiem.getSelectedItem().equals("Nhóm")) {
+            
+            DefaultTableModel model1 = (DefaultTableModel) tblSP.getModel();
+            model1.setNumRows(0);
+            for (Product_CLass p : pd.getByGroup(String.valueOf(cbLoaiTK.getSelectedItem()), String.valueOf(cbKichThuoc.getSelectedItem()))) {
+                model1.addRow(new Object[]{p.getIDProduct(), p.getProductName(), p.getIDType(), p.getPrice(), p.getSize()});
+                tblSP.setModel(model1);
+            }
+            int line = model1.getRowCount();
+            if (line < 1) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm theo yêu cầu");
+               
+            } else {
+              
             }
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        loadcbSP();
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void btnResetSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetSPActionPerformed
+        txtIDProduct.setText("");
+        txtNameproduct.setText("");
+        txtPrice.setText("");
+        cbNameType.setSelectedIndex(0);//re set combobox
+        cbKichCo.setSelectedIndex(0);//re set combobox
+        txtIDProduct.setEnabled(true);
+        btnDeleteSP.setEnabled(false);
+        btnUpdateSP.setEnabled(false);
+        btnAddSP.setEnabled(true);
+        lbDen.setEnabled(false);
+        txtTKTen.setText("");
+        txtDen.setText("");
+        cbKichThuoc.setSelectedIndex(0);
+        cbChonTimKiem.setSelectedIndex(0);
+        DefaultTableModel model = (DefaultTableModel) tblSP.getModel();
+        model.setRowCount(0);
+    }//GEN-LAST:event_btnResetSPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1193,6 +1310,7 @@ public class Product extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

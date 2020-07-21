@@ -263,6 +263,44 @@ public class Promotions extends javax.swing.JFrame {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int click = JOptionPane.showConfirmDialog(null, "Bạn muốn cập nhật chương trình này?");
         if (click == 0) {
+            while (true) {
+                if (txtDis.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Chiết khấu không được bỏ trống.");
+                    return;
+                } else if (!txtDis.getText().trim().matches("[0-9]+") || Integer.parseInt(txtDis.getText().trim()) > 100) {
+                    JOptionPane.showMessageDialog(null, "Chiết khấu phải là số nguyên dương và <= 100.");
+                    return;
+                } else {
+
+                    break;
+                }
+            }
+            while (true) {
+                if (DateStart.getCalendar() == null) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa chọn thời gian bắt đầu");
+                    return;
+                } else if (DateEnd.getCalendar() == null) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa chọn thời gian thúc");
+                    return;
+                }
+                String start = ft.format(DateStart.getDate());
+                String end = ft.format(DateEnd.getDate());
+                if (start.compareTo(end) >= 0) {
+                    JOptionPane.showMessageDialog(null, "Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc.");
+                    return;
+                } else {
+                    break;
+                }
+            }
+            while (true) {
+                if (txtDescription.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Mô tả chương trình không được bỏ trống.");
+                    txtDescription.grabFocus();
+                    return;
+                } else {
+                    break;
+                }
+            }
             pd.capnhat(Integer.parseInt(txtDis.getText()), ft.format(DateStart.getDate()), ft.format(DateEnd.getDate()), txtDescription.getText(), lbID1.getText());
             JOptionPane.showMessageDialog(null, "Cập nhật thành công");
             loadTTtblPromo();
@@ -299,63 +337,65 @@ public class Promotions extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm Chương trình khuyến mại không ?");
-        int line = tblPromo.getRowCount();
-        String name = txtName.getText().replaceAll("\\s+", " ");
-        int chietkhau = Integer.parseInt(txtDis.getText().trim());
-        String descript = txtDescription.getText();
-        String start = ft.format(DateStart.getDate());
-        String end = ft.format(DateEnd.getDate());
         if (click == 0) {
+            int line = tblPromo.getRowCount();
+            String name = txtName.getText();
+            int chietkhau;
+            String descript = txtDescription.getText();
+            String start;
+            String end;
 
-            try {
-                while (true) {
-                    if (name.trim().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Tên chương trình không được bỏ trống.");
-                        txtName.grabFocus();
-                        return;
-                    } else if (name.length() > 50) {
-                        JOptionPane.showMessageDialog(null, "Độ dài tối đa của tên chương trình là 50 ký tự.");
-                        txtName.grabFocus();
-                        return;
-                    } else {
-                        break;
-                    }
+            while (true) {
+                if (name.trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Tên chương trình không được bỏ trống.");
+                    return;
+                } else if (name.length() > 50) {
+                    JOptionPane.showMessageDialog(null, "Độ dài tối đa của tên chương trình là 50 ký tự.");
+                    return;
+                } else {
+                    break;
                 }
-                while (true) {
-                    if (txtDis.getText().trim().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Chiết khấu không được bỏ trống.");
-                        txtDis.grabFocus();
-                        return;
-                    } else if (!txtDis.getText().trim().matches("[0-9]+") || Integer.parseInt(txtDis.getText().trim()) > 100) {
-                        JOptionPane.showMessageDialog(null, "Chiết khấu phải là số nguyên dương và <= 100.");
-                        txtDis.grabFocus();
-                        return;
-                    } else {
-                        break;
-                    }
-                }
-                while (true) {
-                    if (start.compareTo(end) >= 0) {
-                        JOptionPane.showMessageDialog(null, "Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc.");
-                        return;
-                    } else {
-                        break;
-                    }
-                }
-                while (true) {
-                    if (descript.trim().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Mô tả chương trình không được bỏ trống.");
-                        txtDescription.grabFocus();
-                        return;
-                    } else {
-                        break;
-                    }
-                }
-                pd.them(name, chietkhau, start, end, descript);
-                loadTTtblPromo();
-                JOptionPane.showMessageDialog(null, "Thêm thông tin thành công");
-            } catch (Exception e) {
             }
+            while (true) {
+                if (txtDis.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Chiết khấu không được bỏ trống.");
+                    return;
+                } else if (!txtDis.getText().trim().matches("[0-9]+") || Integer.parseInt(txtDis.getText().trim()) > 100) {
+                    JOptionPane.showMessageDialog(null, "Chiết khấu phải là số nguyên dương và <= 100.");
+                    return;
+                } else {
+                    chietkhau = Integer.parseInt(txtDis.getText().trim());
+                    break;
+                }
+            }
+            while (true) {
+                if (DateStart.getCalendar() == null) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa chọn thời gian bắt đầu");
+                    return;
+                } else if (DateEnd.getCalendar() == null) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa chọn thời gian thúc");
+                    return;
+                }
+                start = ft.format(DateStart.getDate());
+                end = ft.format(DateEnd.getDate());
+                if (start.compareTo(end) >= 0) {
+                    JOptionPane.showMessageDialog(null, "Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc.");
+                    return;
+                } else {
+                    break;
+                }
+            }
+            while (true) {
+                if (descript.trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Mô tả chương trình không được bỏ trống.");
+                    return;
+                } else {
+                    break;
+                }
+            }
+            pd.them(name, chietkhau, start, end, descript);
+            loadTTtblPromo();
+            JOptionPane.showMessageDialog(null, "Thêm thông tin thành công");
 
         } else {
             JOptionPane.showMessageDialog(null, "Thêm chương trình khuyến mãi thất bại");

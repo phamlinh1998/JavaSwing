@@ -2,16 +2,16 @@ THE COFFEE
 
 Địa chỉ: Hà Nội
 SĐT: 113
-Thời gian: 20:10:53 15/07/2020
+Thời gian: 20:16:30 21/07/2020
 
-	BẢNG THỐNG KÊ DOANH THU (theo ngày 15/12/2018)
+	BẢNG THỐNG KÊ DOANH THU (theo ngày 21/07/2020)
 
 	---------------------------------
 	ID	Ngày thu	Số tiền
 	---------------------------------
-	3	15/12/2018	206000
+	2	21/07/2020	405000
 	---------------------------------
-	Tổng tiền:		206,000 VNĐ
+	Tổng tiền:		405,000 VNĐ
 
 
 			Người lập (Ký và ghi rõ họ tên)

@@ -407,7 +407,53 @@ public class customer extends javax.swing.JFrame {
                         break;
                     }
                 }
+                while (true) {
 
+                    if (txtName.getText().trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Họ và tên không được để trống !");
+
+                        return;
+                    } else if (!txtName.getText().trim().matches("[A-Za-z^\\p{L}\\s]+")) {
+                        JOptionPane.showMessageDialog(null, "Họ tên không chứa các ký tự đặc biệt ! ");
+                        return;
+                    } else if (txtName.getText().trim().length() > 30) {
+                        JOptionPane.showMessageDialog(null, "Tên không được lớn hơn 30 kí tự ! ");
+
+                        return;
+                    } else {
+                        break;
+                    }
+
+                }
+                while (true) {
+                    if (txtPhone.getText().trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống");
+                        return;
+                    } else if (txtPhone.getText().trim().length() > 11 || txtPhone.getText().trim().length() < 10) {
+                        JOptionPane.showMessageDialog(null, "Số điện thoại gồm 10-11 số.");
+
+                        return;
+                    } else if (!txtPhone.getText().trim().matches("0[1-9]{1}\\d{8,9}")) {
+                        JOptionPane.showMessageDialog(null, "Không đúng định dạng số điện thoại ! Ví dụ : 032345678x hoặc 098765432x");
+
+                        return;
+                    } else {
+                        break;
+                    }
+
+                }
+                while (true) {
+                    if (txtEmail.getText().trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Email không được để trống ");
+                        return;
+                    } else if (!txtEmail.getText().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                        JOptionPane.showMessageDialog(null, "Không đúng định dạng Email ! Ví dụ : (abcdef@gmail.com) ");
+                        return;
+                    } else {
+                        break;
+                    }
+                }
                 java.util.Date date = new java.util.Date();
 
                 cd.them(txtCMND.getText(), txtName.getText(), ft.format(date), txtPhone.getText(), txtEmail.getText(), 0, 0);
@@ -469,6 +515,35 @@ public class customer extends javax.swing.JFrame {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa thông tin thành viên này không?");
         if (click == 0) {
+            while (true) {
+                if (txtPhone.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống");
+                    return;
+                } else if (txtPhone.getText().trim().length() > 11 || txtPhone.getText().trim().length() < 10) {
+                    JOptionPane.showMessageDialog(null, "Số điện thoại gồm 10-11 số.");
+
+                    return;
+                } else if (!txtPhone.getText().trim().matches("0[1-9]{1}\\d{8,9}")) {
+                    JOptionPane.showMessageDialog(null, "Không đúng định dạng số điện thoại ! Ví dụ : 032345678x hoặc 098765432x");
+
+                    return;
+                } else {
+                    break;
+                }
+
+            }
+            while (true) {
+                if (txtEmail.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Email không được để trống ");
+                    return;
+                } else if (!txtEmail.getText().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                    JOptionPane.showMessageDialog(null, "Không đúng định dạng Email ! Ví dụ : (abcdef@gmail.com) ");
+                    return;
+                } else {
+                    break;
+                }
+            }
             cd.capnhat(txtPhone.getText(), txtEmail.getText(), lbID.getText());
             loadTTThanhVien();
             JOptionPane.showMessageDialog(null, "Sửa thành viên thành công");
@@ -519,6 +594,8 @@ public class customer extends javax.swing.JFrame {
         btnDel.setEnabled(false);
         txtCMND.setEnabled(true);
         txtName.setEnabled(true);
+        txtPhone.setEnabled(true);
+        txtEmail.setEnabled(true);
     }//GEN-LAST:event_btnResetActionPerformed
 
     /**

@@ -8,6 +8,7 @@ package DAO;
 import entities.*;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,18 +22,19 @@ import server.ConnectionDB;
  * @author Dell Vostro
  */
 public class EmployeeDAO {
+
     Connection conn = ConnectionDB.getConnection();
 
     public List<Employee> getAll() {
         List<Employee> data = new ArrayList<>();
-        String sql = "select UsernameEmp,UsernameEmp,Gender,Birthday,Phone,Email,Address,Hinh from Employee p";
+        String sql = "select UsernameEmp,NameEmp,Gender,Birthday,Phone,Email,Address,Hinh from Employee ";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Employee ep = new Employee();
                 ep.setUsernameEmp(rs.getString("UsernameEmp"));
-                ep.setNameEmp(rs.getString("UsernameEmp"));
+                ep.setNameEmp(rs.getString("NameEmp"));
                 ep.setGender(rs.getString("Gender"));
                 ep.setBirthday(rs.getString("Birthday"));
                 ep.setPhone(rs.getString("Phone"));
@@ -46,7 +48,8 @@ public class EmployeeDAO {
         }
         return data;
     }
-    public void capnhat(String pass,String Phone,String Email,String Address,String UsernameEmp) {
+
+    public void capnhat(String pass, String Phone, String Email, String Address, String UsernameEmp) {
         String sql = "update Employee set Password=?,Phone=?,Email=?,Address=? where UsernameEmp=?";
         try {
             CallableStatement stm = conn.prepareCall(sql);
@@ -54,18 +57,62 @@ public class EmployeeDAO {
             stm.setString(2, Phone);
             stm.setString(3, Email);
             stm.setString(4, Address);
-            stm.setString(5,UsernameEmp);
+            stm.setString(5, UsernameEmp);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void xoa(String pass, String Phone, String Email, String Address, String UsernameEmp) {
+        String sql = "update Employee set Password=?,Phone=?,Email=?,Address=? where UsernameEmp=?";
+        try {
+            CallableStatement stm = conn.prepareCall(sql);
+            stm.setString(1, pass);
+            stm.setString(2, Phone);
+            stm.setString(3, Email);
+            stm.setString(4, Address);
+            stm.setString(5, UsernameEmp);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void capnhat_password(String pass, String NameEmp) {
+        String sql = "update Employee set Password=? where NameEmp=?";
+        try {
+            CallableStatement stm = conn.prepareCall(sql);
+            stm.setString(1, pass);
+            stm.setString(2, NameEmp);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean getPassword(String NameEmp, String Password) {
+        String sql = "Select * from Employee where NameEmp=? and Password=?";
+        try {
+            CallableStatement stm = conn.prepareCall(sql);
+            stm.setString(1, NameEmp);
+            stm.setString(2, Password);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public void them(Employee e) {
         String sql = "insert into Employee values (?,?,?,?,?,?,?,?,?)";
         try {
             CallableStatement stm = conn.prepareCall(sql);
             stm.setString(1, e.getUsernameEmp());
-            stm.setString(2, e.getPassword() );
+            stm.setString(2, e.getPassword());
             stm.setString(3, e.getNameEmp());
             stm.setString(4, e.getGender());
             stm.setString(5, e.getBirthday());
@@ -78,19 +125,38 @@ public class EmployeeDAO {
             Logger.getLogger(ProductTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public Employee getByUser(String id){
+
+    public Employee getByUser(String id) {
         String sql = "SELECT UsernameEmp,UsernameEmp,Gender,Birthday,Phone,Email,Address,Hinh FROM Employee WHERE UsernameEmp like ?";
         Employee e = null;
         try {
             CallableStatement cs = conn.prepareCall(sql);
             cs.setObject(1, id);
             ResultSet rs = cs.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 e = new Employee(rs.getString("UsernameEmp"), rs.getString("UsernameEmp"), rs.getString("Gender"), rs.getString("Birthday"), rs.getString("Phone"), rs.getString("Email"), rs.getString("Address"), rs.getString("Hinh"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return e;
+    }
+
+    public Employee getByName(String ten) {
+        Employee e = new Employee();
+        String sql = "SELECT UsernameEmp FROM Employee WHERE NameEmp = ?";
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, ten);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                e.setUsernameEmp(rs.getString("UsernameEmp"));
+                return e;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

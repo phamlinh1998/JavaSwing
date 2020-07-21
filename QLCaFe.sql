@@ -8,6 +8,7 @@ create table ProductType
 	TypeName nvarchar(50),
 	Size nvarchar(10)
 )
+select * from Promotions
 go
 create table Product
 (
@@ -21,6 +22,7 @@ create table Administrator(
 	Username varchar(50) Primary key,
 	Password varchar(20)
 )
+
 go
 create table Employee(
 	UsernameEmp varchar(50) Primary key,
@@ -33,7 +35,6 @@ create table Employee(
 	Address nvarchar(Max),
 	Hinh varchar(50)
 )
-select * from Employee
 
 go
 Create Table Revenue(
@@ -43,7 +44,7 @@ Create Table Revenue(
 )
 go
 create table Customer(
-	IDCus int Identity(100000,1) Primary key,
+	IDCus int Identity(1,1) Primary key,
 	IdentityCard varchar(20) not null UNIQUE,
 	CusName nvarchar(50),
 	DateAdd varchar(20),
@@ -61,6 +62,8 @@ create table Promotions(
 	EndPromo varchar(20),
 	Description nvarchar(Max)
 )
+
+
 go
 create table Orders(
 	IDOrder varchar(20) Primary key,
@@ -68,15 +71,26 @@ create table Orders(
 	TimeOrder varchar(20),
 	UsernameEmp varchar(50) foreign key REFERENCES Employee(UsernameEmp)
 )
+
 go
 Create Table OrderDetails(
 	IDOrder varchar(20) foreign key REFERENCES Orders(IDOrder),
 	IDProduct varchar(20) foreign key REFERENCES Product(IDProduct),
-	CusName nvarchar(50),
+	IDCus int foreign key REFERENCES Customer(IDCus),
 	Quantity int,
-	NamePromo nvarchar(50),
+	NamePromo nvarchar(50) foreign key REFERENCES Promotions(NamePromo),
 	Constraint PK_OrderDetails Primary key (IDOrder,IDProduct)
 )
+Insert into OrderDetails values('HD0001','CF02',1,4,N'Khách hàng VIP')
+Insert into OrderDetails values('HD0002','CF03',2,5,N'Khách hàng VIP')
+Insert into OrderDetails values('HD0005','CF03',3,5,N'')
+go
+Create proc tmkiem
+@ten nvarchar(100)
+as
+begin
+select * from Product p inner join ProductType pt on p.IDType = pt.IDType where ProductName like N'@ten %'
+end
 go
 CREATE PROC TimKiemOrder
 	@IDOrder varchar(20),
@@ -125,7 +139,7 @@ BEGIN
 		END 
 END 
        
-
+select * from OrderDetails join Orders on OrderDetails.IDOrder=Orders.IDOrder join Product on OrderDetails.IDProduct=Product.IDProduct join Promotions on OrderDetails.NamePromo=Promotions.NamePromo
 exec TimKiemOrder '','','',N'Khách hàng VIP','',''
 --Insert 1 Administrators
 Insert into Administrator values('admin','admin')
@@ -146,28 +160,26 @@ Insert into Product values('CF03', N'Cà phê đá', 'T03', 30000)
 
 Insert into Employee values('vutung','123456',N'Vũ Văn Tùng',N'Nam','01/01/1996','0124566789','tung@gmail.com',N'Dĩ an','2.jpg')
 
-select * from Product p inner join ProductType pt on p.IDType = pt.IDType where ProductName like N'Cà phê đá'
-select * from Product p inner join ProductType pt on p.IDType = pt.IDType where Price BETWEEN 25000 and 30000
-select * from ProductType
 Insert into Customer values('122261551',N'Vũ Văn Tùng','17/04/2017','01212692802','tung@gmail.com',20,10)
 Insert into Customer values('122261552',N'Nguyễn Huỳnh Thanh Tùng','23/04/2017','01212692802','thanhtung@gmail.com',25,10)
 Insert into Customer values('122261553',N'Nguyễn Ngân','20/04/2017','01212692802','nguyenngan@gmail.com',19,5)
 Insert into Customer values('122261554',N'Nguyễn Văn Trí','11/04/2017','01212692802','tri@gmail.com',10,5)
 
-select * from Orders
+
 --Insert 6 Order
 Insert into Orders values('HD0001','11/04/2017','19:49:50','vutung')
 Insert into Orders values('HD0002','20/12/2016','22:43:50','vutung')
+Insert into Orders values('HD0005','20/12/2016','22:43:50','vutung')
 --Insert 10 OrderDetails
-Insert into OrderDetails values('HD0001','CF02',N'100003',4,N'Khách hàng VIP')
-Insert into OrderDetails values('HD0002','CF03',N'100003',5,N'Khách hàng VIP')
-
+Insert into OrderDetails values('HD0001','CF02',1,4,N'Khách hàng VIP')
+Insert into OrderDetails values('HD0002','CF03',2,5,N'Khách hàng VIP')
+Insert into OrderDetails values('HD0005','CF03',3,5,N'')
+select * from OrderDetails
 Insert into Revenue values('10/04/2019','179000')
 Insert into Revenue values('13/03/2020','50000')
 Insert into Revenue values('15/12/2018','206000')
 
-select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp 
-from OrderDetails join [Orders] on OrderDetails.IDOrder=[Orders].IDOrder 
-where   [Orders].UsernameEmp LIKE 'vutung' 
+ 
 
 Insert into Promotions values(N'Thẻ sinh viên',10,'16/07/2020','18/07/2020',N'Có thẻ sinh viên')
+select Orders.IDOrder,IDProduct,CusName,Quantity,NamePromo,TimeOrder,DateOrder,UsernameEmp from OrderDetails join Orders on OrderDetails.IDOrder=Orders.IDOrder Order by OrderDetails.IDOrder DESC

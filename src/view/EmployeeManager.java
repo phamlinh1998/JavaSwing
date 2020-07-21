@@ -32,7 +32,6 @@ public class EmployeeManager extends javax.swing.JFrame {
      */
     Connection conn = ConnectionDB.getConnection();
     SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy");
-    SimpleDateFormat ftError = new SimpleDateFormat("yyyy/MM/dd");
     setImage img = new setImage();
     java.util.Date now = new java.util.Date();
     DefaultTableModel tblModel;
@@ -60,6 +59,8 @@ public class EmployeeManager extends javax.swing.JFrame {
         btnLuong.setSize(25, 25);
         new setImage().setImageButton(btnLuong, "image//calculator.png");
         loaddataNV();
+        rdMale.setSelected(true);
+        btnLuong.setEnabled(false);
     }
 
     public void loaddataNV() {
@@ -129,6 +130,10 @@ public class EmployeeManager extends javax.swing.JFrame {
         txtPass = new javax.swing.JPasswordField();
         txtPass1 = new javax.swing.JPasswordField();
         btnTimKiem = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1350, 750));
@@ -232,15 +237,15 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtThuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTienLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtThuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(txtTienLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -353,12 +358,28 @@ public class EmployeeManager extends javax.swing.JFrame {
         jLabel19.setText("*");
 
         btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnTimKiem.setText("Tìm kiếm nhân viên");
+        btnTimKiem.setText("Tìm kiếm nhân viên theo mã");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimKiemActionPerformed(evt);
             }
         });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 204));
+        jLabel5.setText("*");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 0, 204));
+        jLabel9.setText("*");
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 0, 204));
+        jLabel22.setText("*");
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 0, 204));
+        jLabel23.setText("*");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -402,14 +423,23 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(rdMale)
-                        .addGap(18, 18, 18)
-                        .addComponent(rdFemale))
-                    .addComponent(txtName)
-                    .addComponent(txtBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                    .addComponent(txtPhone))
-                .addGap(180, 180, 180))
+                        .addGap(45, 45, 45)
+                        .addComponent(rdMale, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(rdFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(txtPhone)
+                            .addComponent(txtName))))
+                .addGap(150, 150, 150))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -428,6 +458,10 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -436,12 +470,8 @@ public class EmployeeManager extends javax.swing.JFrame {
                                 .addGap(32, 32, 32)
                                 .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 102, Short.MAX_VALUE))
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 84, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(195, 195, 195)
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -462,19 +492,25 @@ public class EmployeeManager extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtUser, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lbHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(27, 27, 27))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(rdMale)
+                                        .addComponent(rdFemale))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(rdMale)
-                                    .addComponent(rdFemale))
-                                .addGap(220, 220, 220))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)))
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -483,13 +519,17 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(182, 182, 182)
+                                .addGap(173, 173, 173)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel22))
+                                    .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                                        .addComponent(jLabel23))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(txtPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -542,6 +582,7 @@ public class EmployeeManager extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPhoneActionPerformed
 
     private void tblEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpMouseClicked
+        btnLuong.setEnabled(true);
         try {
             btnAdd.setEnabled(false);
             btnDelete.setEnabled(true);
@@ -612,7 +653,7 @@ public class EmployeeManager extends javax.swing.JFrame {
         txtPass1.setText("");
         txtPhone.setText("");
         tarAddress.setText("");
-        img.setImagelable(lbHinh, "image//trongsuot.png");
+        lbHinh.setText("");
         txtHinh.setText("");
         txtUser.setEnabled(true);
         txtPass.setEnabled(true);
@@ -621,6 +662,7 @@ public class EmployeeManager extends javax.swing.JFrame {
         tarAddress.setEnabled(true);
         txtName.setEnabled(true);
         txtBirthday.setEnabled(true);
+        txtBirthday.setCalendar(null);
         txtHinh.setEnabled(true);
         rdFemale.setEnabled(true);
         rdMale.setEnabled(true);
@@ -696,15 +738,15 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
             while (true) {
                 if (tarAddress.getText().trim().equals("")) {
-                    JOptionPane.showMessageDialog(this, "Địa chỉ không được để trống !");
-
+                    JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
                     return;
                 } else if (tarAddress.getText().trim().length() > 100) {
-                    JOptionPane.showMessageDialog(this, "Địa chỉ không được lớn hơn 100 kí tự ! ");
-
+                    JOptionPane.showMessageDialog(null, "Địa chỉ không được lớn hơn 100 kí tự ! ");
                     return;
-                }
-                {
+                } else if (!tarAddress.getText().trim().matches("[A-Za-z0-9^\\p{L}\\s]+")) {
+                    JOptionPane.showMessageDialog(null, "Địa chỉ không chứa các ký tự đặc biệt ! ");
+                    return;
+                } else {
                     break;
                 }
 
@@ -720,8 +762,9 @@ public class EmployeeManager extends javax.swing.JFrame {
             txtPass1.setText("");
             txtPhone.setText("");
             tarAddress.setText("");
-            img.setImagelable(lbHinh, "image//trongsuot.png");
+            lbHinh.setText("");
             txtHinh.setText("");
+            txtBirthday.setCalendar(null);
 
         } else {
             JOptionPane.showMessageDialog(null, "Sửa loại sản phẩm không thành công");
@@ -729,113 +772,171 @@ public class EmployeeManager extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int click = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa ?");
+        if (click == 0) {
+            try {
+                PreparedStatement ps = conn.prepareStatement("select * from [Orders] where UsernameEmp=?");
+                ps.setString(1, txtUser.getText());
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Nhân viên đang còn đơn hàng, không thể xóa.");
+                } else {
+                    try {
+                        ps = conn.prepareStatement("Delete from Employee where UsernameEmp=?");
+                        ps.setString(1, txtUser.getText());
+                        ps.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Xóa thành công ! ");
+                        btnResetActionPerformed(evt);
+                        tblModel.getDataVector().removeAllElements();
+                        loaddataNV();
+                    } catch (Exception e) {
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm nhân viên mới  ?");
-        while (true) {
-            try {
-                PreparedStatement ps = conn.prepareStatement("select * from Employee where UsernameEmp = ?");
-                ps.setString(1, txtUser.getText().trim());
-                ResultSet rs = ps.executeQuery();
-                if (txtUser.getText().trim().equals("")) {
-                    JOptionPane.showMessageDialog(this, "Tài khoản không được để trống !");
+        if (click == 0) {
+            while (true) {
+                try {
+                    PreparedStatement ps = conn.prepareStatement("select * from Employee where UsernameEmp = ?");
+                    ps.setString(1, txtUser.getText().trim());
+                    ResultSet rs = ps.executeQuery();
+                    if (txtUser.getText().trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Tài khoản không được để trống !");
+
+                        return;
+                    } else if (rs.next()) {
+                        JOptionPane.showMessageDialog(this, "Tài khoản này đã tồn tại !");
+
+                        return;
+                    } else if (txtUser.getText().trim().length() > 30) {
+                        JOptionPane.showMessageDialog(null, "Tài khoản không được lớn hơn 30 kí tự ! ");
+
+                        return;
+                    } else if (txtUser.getText().trim().length() < 6) {
+                        JOptionPane.showMessageDialog(null, "Tài khoản phải lớn hơn 6 kí tự  ! ");
+
+                        return;
+                    } else if (!txtUser.getText().trim().matches("[A-Za-z0-9]+")) {
+                        JOptionPane.showMessageDialog(null, "Tài khoản không chứa các ký tự đặc biếtj ! ");
+
+                        return;
+                    } else {
+                        break;
+                    }
+                } catch (Exception e) {
+                }
+
+            }
+            while (true) {
+
+                if (txtPass.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Mật khẩu không được để trống ! ");
 
                     return;
-                } else if (rs.next()) {
-                    JOptionPane.showMessageDialog(this, "Tài khoản này đã tồn tại !");
+                } else if (txtPass.getText().trim().length() > 18) {
+                    JOptionPane.showMessageDialog(null, "Mật khẩu không được lớn hơn 18 kí tự ! ");
 
                     return;
-                } else if (txtUser.getText().trim().length() > 30) {
-                    JOptionPane.showMessageDialog(this, "Tài khoản không được lớn hơn 30 kí tự ! ");
-
-                    return;
-                } else if (txtUser.getText().trim().length() < 6) {
-                    JOptionPane.showMessageDialog(this, "Tài khoản phải lớn hơn 6 kí tự  ! ");
-
-                    return;
-                } else if (!txtUser.getText().trim().matches("[A-Za-z0-9]+")) {
-                    JOptionPane.showMessageDialog(this, "Tài khoản phải có chữ và số ! ");
+                } else if (txtPass.getText().trim().length() < 6) {
+                    JOptionPane.showMessageDialog(null, "Mật khẩu phải lớn hơn 6 kí tự  ! ");
 
                     return;
                 } else {
                     break;
                 }
-            } catch (Exception e) {
+
             }
-
-        }
-        while (true) {
-
-            if (txtPass.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống ! ");
-
-                return;
-            } else if (txtPass.getText().trim().length() > 18) {
-                JOptionPane.showMessageDialog(this, "Mật khẩu không được lớn hơn 18 kí tự ! ");
-
-                return;
-            } else if (txtPass.getText().trim().length() < 6) {
-                JOptionPane.showMessageDialog(this, "Mật khẩu phải lớn hơn 6 kí tự  ! ");
-
-                return;
-            } else if (!txtPass.getText().matches("[A-Za-z0-9]+")) {
-                JOptionPane.showMessageDialog(this, "Mật khẩu không được có khoảng cách và kí tự đặc biệt ! ");
-
-                return;
-            } else {
-                break;
-            }
-
-        }
-        while (true) {
-            if (txtPass1.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không được để trống !");
-
-                return;
-            } else if (!txtPass1.getText().trim().equals(txtPass.getText().trim())) {
-                JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu phải giống mật khẩu !");
-
-                return;
-            } else {
-                break;
-            }
-
-        }
-        while (true) {
-            if (txtName.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(this, "Họ và tên không được để trống !");
-
-                return;
-            } else if (txtName.getText().trim().length() > 30) {
-                JOptionPane.showMessageDialog(this, "Tên không được lớn hơn 30 kí tự ! ");
-
-                return;
-            }
-            {
-                break;
-            }
-
-        }
-        while (true) {
-            if (ftError.format(txtBirthday.getDate()).compareTo("2000/01/01") >= 0) {
-                JOptionPane.showMessageDialog(this, "Nhân viên phải đủ 18 tuổi !");
-
-                return;
-            } else {
-                break;
-            }
-
-        }
-        if (!txtPhone.getText().trim().equals("")) {
             while (true) {
-                if (txtPhone.getText().trim().length() > 11 || txtPhone.getText().trim().length() < 10) {
-                    JOptionPane.showMessageDialog(this, "Số điện thoại gồm 10-11 số.");
+                if (txtPass1.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Xác nhận mật khẩu không được để trống !");
+
+                    return;
+                } else if (!txtPass1.getText().trim().equals(txtPass.getText().trim())) {
+                    JOptionPane.showMessageDialog(null, "Xác nhận mật khẩu phải giống mật khẩu !");
+
+                    return;
+                } else {
+                    break;
+                }
+
+            }
+            while (true) {
+                if (txtEmail.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Email không được để trống ");
+                    return;
+                } else if (!txtEmail.getText().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                    JOptionPane.showMessageDialog(null, "Không đúng định dạng Email ! Ví dụ : (abcdef@gmail.com) ");
+                    return;
+                } else {
+                    break;
+                }
+            }
+            while (true) {
+                if (tarAddress.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
+                    return;
+                } else if (tarAddress.getText().trim().length() > 100) {
+                    JOptionPane.showMessageDialog(null, "Địa chỉ không được lớn hơn 100 kí tự ! ");
+                    return;
+                } else if (!tarAddress.getText().trim().matches("[A-Za-z0-9^\\p{L}\\s]+")) {
+                    JOptionPane.showMessageDialog(null, "Địa chỉ không chứa các ký tự đặc biệt ! ");
+                    return;
+                } else {
+                    break;
+                }
+
+            }
+            while (true) {
+
+                if (txtName.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Họ và tên không được để trống !");
+
+                    return;
+                } else if (!txtName.getText().trim().matches("[A-Za-z^\\p{L}\\s]+")) {
+                    JOptionPane.showMessageDialog(null, "Họ tên không chứa các ký tự đặc biệt ! ");
+                    return;
+                } else if (txtName.getText().trim().length() > 30) {
+                    JOptionPane.showMessageDialog(null, "Tên không được lớn hơn 30 kí tự ! ");
+
+                    return;
+                } else {
+                    break;
+                }
+
+            }
+            
+            while (true) {
+                if (txtBirthday.getCalendar()== null) {
+                    JOptionPane.showMessageDialog(null, "ngày sinh không được để trống");
+                } else if (ft.format(txtBirthday.getDate()).compareTo("01/01/2020") >= 0) {
+                    ft.format(txtBirthday.getDate());
+                    JOptionPane.showMessageDialog(null, "Nhân viên phải đủ 18 tuổi !");
+                    return;
+                } else {
+                    ft.format(txtBirthday.getDate());
+                    break;
+                }
+
+            }
+
+            while (true) {
+                if (txtPhone.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống");
+                    return;
+                } else if (txtPhone.getText().trim().length() > 11 || txtPhone.getText().trim().length() < 10) {
+                    JOptionPane.showMessageDialog(null, "Số điện thoại gồm 10-11 số.");
 
                     return;
                 } else if (!txtPhone.getText().trim().matches("0[1-9]{1}\\d{8,9}")) {
-                    JOptionPane.showMessageDialog(this, "Không đúng định dạng số điện thoại ! Ví dụ : 012345678x hoặc 098765432x");
+                    JOptionPane.showMessageDialog(null, "Không đúng định dạng số điện thoại ! Ví dụ : 032345678x hoặc 098765432x");
 
                     return;
                 } else {
@@ -843,55 +944,32 @@ public class EmployeeManager extends javax.swing.JFrame {
                 }
 
             }
-        }
-        if (!txtEmail.getText().trim().equals("")) {
+
             while (true) {
-                if (!txtEmail.getText().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-                    JOptionPane.showMessageDialog(this, "Không đúng định dạng Email ! Ví dụ : (abcdef@gmail.com) ");
+                if (txtHinh.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Hình ảnh không được để trống !");
 
                     return;
                 } else {
                     break;
                 }
+
             }
-        }
-        while (true) {
-            if (tarAddress.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(this, "Địa chỉ không được để trống !");
 
-                return;
-            } else if (tarAddress.getText().trim().length() > 100) {
-                JOptionPane.showMessageDialog(this, "Địa chỉ không được lớn hơn 100 kí tự ! ");
+            if (rdMale.isSelected()) {
+                Employee e = new Employee(txtUser.getText(), txtPass.getText(), txtName.getText(), "Nam", ft.format(txtBirthday.getDate()), txtPhone.getText(), txtEmail.getText(), tarAddress.getText(), txtHinh.getText());
 
-                return;
+                ed.them(e);
             } else {
-                break;
+                Employee e = new Employee(txtUser.getText(), txtPass.getText(), txtName.getText(), "Nữ", ft.format(txtBirthday.getDate()), txtPhone.getText(), txtEmail.getText(), tarAddress.getText(), txtHinh.getText());
+                ed.them(e);
             }
-
-        }
-        while (true) {
-            if (txtHinh.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(this, "Hình ảnh không được để trống !");
-
-                return;
-            } else {
-                break;
-            }
-
-        }
-
-        if (rdMale.isSelected()) {
-            Employee e = new Employee(txtUser.getText(), txtPass.getText(), txtName.getText(), "Nam", ft.format(txtBirthday.getDate()), txtPhone.getText(), txtEmail.getText(), tarAddress.getText(), txtHinh.getText());
-
-            ed.them(e);
+            loaddataNV();
+            JOptionPane.showMessageDialog(null, "Thêm nhân viên thành công");
         } else {
-            Employee e = new Employee(txtUser.getText(), txtPass.getText(), txtName.getText(), "Nữ", ft.format(txtBirthday.getDate()), txtPhone.getText(), txtEmail.getText(), tarAddress.getText(), txtHinh.getText());
-            ed.them(e);
+            JOptionPane.showMessageDialog(null, "Thêm nhân viên thất bại");
         }
-        loaddataNV();
-        JOptionPane.showMessageDialog(null, "Thêm nhân viên thành công");
-        btnResetActionPerformed(evt);
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseActionPerformed
@@ -969,6 +1047,7 @@ public class EmployeeManager extends javax.swing.JFrame {
             model1.addRow(new Object[]{e.getUsernameEmp(), e.getNameEmp(), e.getGender(), e.getBirthday(), e.getPhone(), e.getEmail(), e.getAddress(), e.getHinh()});
             tblEmp.setModel(model1);
         }
+        txtSearch.setText("");
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
@@ -1031,11 +1110,15 @@ public class EmployeeManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
